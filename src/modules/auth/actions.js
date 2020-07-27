@@ -1,0 +1,121 @@
+// import { SubmissionError } from 'redux-form';
+// import { removeCookie } from 'redux-cookie';
+
+import * as actionTypes from './actionTypes';
+import constants from "../constants";
+
+export const setSSOToken = (token) => ({
+  type: actionTypes.SET_SSO_TOKEN,
+  payload: {
+    token: token
+  }
+});
+
+export const clearSSOToken = () => ({
+  type: actionTypes.CLEAR_SSO_TOKEN
+});
+
+export const logout = () => dispatch => {
+  dispatch({ type: actionTypes.LOGOUT });
+  dispatch(clearSSOToken());
+  if (typeof window !== 'undefined') {
+    // XXX
+    // dispatch(removeCookie(constants.FLIGHT_SSO_COOKIE, { domain: window.location.hostname.substring(window.location.hostname.indexOf('alces')) }));
+  }
+  else {
+    // XXX
+    // dispatch(removeCookie(constants.FLIGHT_SSO_COOKIE));
+  }
+};
+
+export const showConfirmPasswordForm = ({ manuallyShown } = {}) => ({
+  type: actionTypes.CONFIRM_PASSWORD_MODAL_SHOWN,
+  payload: {
+    manuallyShown,
+  },
+});
+
+export const hideConfirmPasswordForm = ({ manuallyDismissed } = {}) => ({
+  type: actionTypes.CONFIRM_PASSWORD_MODAL_HIDDEN,
+  payload: {
+    manuallyDismissed,
+  },
+});
+
+export const showLoginForm = () => ({
+  type: actionTypes.SHOW_LOGIN_FORM
+});
+
+export const hideLoginForm = () => ({
+  type: actionTypes.HIDE_LOGIN_FORM
+});
+
+function loginAction(
+  type,
+  params,
+  { permanent=false, withCredentials=true } = {},
+) {
+  return {
+    type,
+    meta: {
+      apiRequest: {
+        config: {
+          url: `${constants.ssoBaseURL}/sign-in${permanent ? '?permanent=1' : ''}`,
+          method: 'post',
+          data: {
+            account: params,
+          },
+          withCredentials: withCredentials,
+        },
+        skipAuthHeader: !withCredentials,
+      }
+    }
+  };
+}
+
+function dispatchLoginAction(dispatch, action, { errorMessages }) {
+  return dispatch(action)
+    .catch(({ error }) => {
+      const response = error.response;
+      if (response && response.status === 401) {
+        // XXX
+        // throw new SubmissionError({
+        //   login: errorMessages.unauthorized,
+        //   password: errorMessages.unauthorized,
+        // });
+      }
+      throw error;
+    });
+}
+
+export const confirmPassword = (data, user) => dispatch => {
+  const params = {
+    ...data,
+    login: user.email,
+  };
+  const action = loginAction(
+    actionTypes.CONFIRM_PASSWORD,
+    params,
+    {
+      withCredentials: false,
+      permanent: user.permanent
+    }
+  );
+
+  return dispatchLoginAction(dispatch, action, {
+    errorMessages: {
+      unauthorized: 'Invalid password',
+    }
+  });
+};
+
+export const login = (data) => dispatch => {
+  const { permanent, ...rest } = data;
+  const action = loginAction(actionTypes.LOGIN, rest, { permanent });
+
+  return dispatchLoginAction(dispatch, action, {
+    errorMessages: {
+      unauthorized: 'Invalid username or password',
+    }
+  });
+};

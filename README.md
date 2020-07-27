@@ -27,4 +27,4 @@ class Example extends Component {
 
 ## License
 
-EPL © [benarmston](https://github.com/benarmston)
+EPL © [Alces Flight Ltd](https://github.com/openflighthpc)
