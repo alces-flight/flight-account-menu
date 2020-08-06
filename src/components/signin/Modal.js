@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import auth from '../../modules/auth';
+import registration from '../../modules/registration';
 
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
@@ -16,6 +17,7 @@ function SignInModal({
   hideLoginForm,
   login,
   signOnState,
+  startSignUp,
 }) {
   const { handleSubmit, handleInputChange, inputs } = useForm(login);
 
@@ -62,6 +64,19 @@ function SignInModal({
         </div>
         <button type="submit" className="d-none"></button>
       </form>
+
+      <hr/>
+      <span className="text-muted">
+        Don&rsquo;t have an account yet?{' '}
+      </span>
+      <button
+        className="btn btn-link p-0 pb-1"
+        onClick={() => {hideLoginForm() ; startSignUp();}}
+        tabIndex={1}
+      >
+        Sign up
+      </button>
+
     </StandardModal>
   );
 }
@@ -73,5 +88,6 @@ export default connect(
   {
     login: auth.actions.login,
     hideLoginForm: auth.actions.hideLoginForm,
+    startSignUp: registration.actions.startSignUp,
   }
 )(SignInModal);

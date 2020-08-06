@@ -1,20 +1,20 @@
 import React from 'react';
-import { Field } from 'redux-form';
 import { FormGroup } from 'reactstrap';
 
-import FormInput from '../../../components/FormInput';
-
+import FormInput from '../FormInput';
 import TermsLabel from './TermsLabel';
 
-const TermsOfServiceAgreement = () => (
+const TermsOfServiceAgreement = ({ handleInputChange, inputs }) => (
   <FormGroup check>
-    <Field
+    <FormInput
       check
-      component={FormInput}
-      id='terms'
-      label={<TermsLabel />}
       name='terms'
+      label={<TermsLabel />}
       type='checkbox'
+      input={{
+        onChange: handleInputChange,
+        value: inputs.terms,
+      }}
     />
   </FormGroup>
 );

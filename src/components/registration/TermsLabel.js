@@ -1,10 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import silenceEvents from '../../../utils/silenceEvents';
-
-import * as actions from '../actions';
+import silenceEvents from '../../utils/silenceEvents';
+import registration from '../../modules/registration'; 
 
 const TermsLabel = ({ onShowPrivacyPolicy, onShowTerms }) => (
   <span>
@@ -25,12 +23,7 @@ const TermsLabel = ({ onShowPrivacyPolicy, onShowTerms }) => (
   </span>
 );
 
-TermsLabel.propTypes = {
-  onShowPrivacyPolicy: PropTypes.func.isRequired,
-  onShowTerms: PropTypes.func.isRequired,
-};
-
 export default connect(null, {
-  onShowPrivacyPolicy: silenceEvents(actions.showPrivacyPolicyModal),
-  onShowTerms: silenceEvents(actions.showTermsModal),
+  onShowPrivacyPolicy: silenceEvents(registration.actions.showPrivacyPolicyModal),
+  onShowTerms: silenceEvents(registration.actions.showTermsModal),
 })(TermsLabel);
