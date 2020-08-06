@@ -1,10 +1,19 @@
 import React from 'react'
 
-import { ExampleComponent } from 'flight-account-menu'
+import { AccountMenu } from 'flight-account-menu'
 import 'flight-account-menu/dist/index.css'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return (
+    <AccountMenu 
+      signedInLinks={[
+        {
+          href: "https://center.alces-flight.com",
+          text: "Flight Center",
+        }
+      ]}
+    />
+  );
 }
 
 export default App

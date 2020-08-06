@@ -21,7 +21,8 @@
     "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "lint": "eslint src/"
   },
   "peerDependencies": {
     "react": "^16.0.0"
@@ -52,9 +53,11 @@
   ],
   "dependencies": {
     "axios": "^0.19.2",
+    "classnames": "^2.2.6",
     "jwt-decode": "^2.2.0",
     "pluralize": "^8.0.0",
     "react-redux": "^7.2.1",
+    "reactstrap": "^8.5.1",
     "redux": "^4.0.5",
     "redux-axios-middleware": "^4.0.1",
     "redux-thunk": "^2.3.0",
