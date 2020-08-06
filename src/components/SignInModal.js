@@ -6,6 +6,7 @@ import StandardModal from './StandardModal';
 import StatefulButton from './StatefulButton';
 import auth from '../modules/auth';
 import useForm from '../useForm';
+import FormInput from './FormInput';
 
 const modalIsDisplayed = (stage) => stage !== auth.constants.signOnStates.NOT_STARTED;
 const isSubmitting = (stage) => stage === auth.constants.signOnStates.SUBMITTING;
@@ -37,31 +38,25 @@ function SignInModal({
     >
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="login">
-            Enter your Flight username or email address:
-          </label>
-          <input
-            className="form-control"
-            id="login"
+          <FormInput
+            label="Enter your Flight username or email address"
             name="login"
-            onChange={handleInputChange}
-            required
             type="text"
-            value={inputs.login == null ? "" : inputs.login}
+            input={{
+              onChange: handleInputChange,
+              value: inputs.login,
+            }}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">
-            Enter your password:
-          </label>
-          <input
-            className="form-control"
-            id="password"
+          <FormInput
+            label="Enter your password"
             name="password"
-            onChange={handleInputChange}
-            required
             type="password"
-            value={inputs.password == null ? "" : inputs.password}
+            input={{
+              onChange: handleInputChange,
+              value: inputs.password,
+            }}
           />
         </div>
         <button type="submit" className="d-none"></button>
