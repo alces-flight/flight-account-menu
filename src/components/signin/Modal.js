@@ -2,11 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import StandardModal from './StandardModal';
-import StatefulButton from './StatefulButton';
-import auth from '../modules/auth';
-import useForm from '../useForm';
-import FormInput from './FormInput';
+import auth from '../../modules/auth';
+
+import StandardModal from '../StandardModal';
+import StatefulButton from '../StatefulButton';
+import useForm from '../../useForm';
+import FormInput from '../FormInput';
 
 const modalIsDisplayed = (stage) => stage !== auth.constants.signOnStates.NOT_STARTED;
 const isSubmitting = (stage) => stage === auth.constants.signOnStates.SUBMITTING;

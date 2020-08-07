@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import auth from '../modules/auth';
 import SignedIn from './Menu/SignedIn';
 import SignedOut from './Menu/SignedOut';
-import SignInModal from './SignInModal';
+import SignInModal from './signin/Modal';
 
 function Menu({ currentUser, signedInLinks }) {
   if (currentUser) {
