@@ -28,8 +28,9 @@ const RegistrationModal = ({
   const submitButton = (
     <StatefulButton
       className="btn btn-primary"
-      submittingText="Signing up..."
+      onClick={handleSubmit}
       submitting={isSubmitting(registrationStage)}
+      submittingText="Signing up..."
     >
       Sign up
     </StatefulButton>

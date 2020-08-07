@@ -37,7 +37,7 @@ function RegistrationForm({ handleSubmit, handleInputChange, inputs }) {
           name="password"
           required
           type="password"
-          userInputs={[ inputs.email, inputs.username ]}
+          // userInputs={[ inputs.email, inputs.username ]}
           input={{
             onChange: handleInputChange,
             value: inputs.password,
@@ -62,7 +62,7 @@ function RegistrationForm({ handleSubmit, handleInputChange, inputs }) {
         inputs={inputs}
       />
 
-      <div class="form-group form-check">
+      <div className="form-group form-check">
       </div>
 
 

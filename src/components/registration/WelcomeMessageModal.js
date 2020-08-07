@@ -1,13 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import StandardModal from '../../../components/StandardModal';
+import registration from '../../modules/registration'; 
 
-import * as actions from '../actions';
-import * as selectors from "../selectors";
+import StandardModal from '../StandardModal';
 
 const WelcomeMessageModal = ({
   closeModal,
@@ -31,18 +29,13 @@ const WelcomeMessageModal = ({
   </StandardModal>
 );
 
-WelcomeMessageModal.propTypes = {
-  closeModal: PropTypes.func,
-  isOpen: PropTypes.bool.isRequired,
-};
-
 const enhance = compose(
   connect(
     createStructuredSelector({
-      isOpen: selectors.isWelcomeMessageModalShowing,
+      isOpen: registration.selectors.isWelcomeMessageModalShowing,
     }),
     {
-      closeModal: actions.hideWelcomeMessageModal,
+      closeModal: registration.actions.hideWelcomeMessageModal,
     }
   ),
 );

@@ -4,28 +4,33 @@ import { createStructuredSelector } from 'reselect';
 
 import auth from '../modules/auth';
 
+import PrivacyPolicyModal from './registration/PrivacyPolicyModal';
+import RegistrationModal from './registration/Modal';
+import SignInModal from './signin/Modal';
 import SignedIn from './Menu/SignedIn';
 import SignedOut from './Menu/SignedOut';
-import SignInModal from './signin/Modal';
-import RegistrationModal from './registration/Modal';
 import TermsModal from './registration/TermsModal';
-import PrivacyPolicyModal from './registration/PrivacyPolicyModal';
+import WelcomeMessageModal from './registration/WelcomeMessageModal';
 
 function Menu({ currentUser, signedInLinks }) {
   if (currentUser) {
     return (
-      <SignedIn
-        currentUser={currentUser}
-        signedInLinks={signedInLinks}
-      />
+      <React.Fragment>
+        <WelcomeMessageModal />
+
+        <SignedIn
+          currentUser={currentUser}
+          signedInLinks={signedInLinks}
+        />
+      </React.Fragment>
     );
   }
   return (
     <React.Fragment>
-      <RegistrationModal />
-      <TermsModal />
       <PrivacyPolicyModal />
+      <RegistrationModal />
       <SignInModal />
+      <TermsModal />
 
       <SignedOut />
     </React.Fragment>
