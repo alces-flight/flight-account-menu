@@ -7,15 +7,7 @@ import {
   Input,
 } from 'reactstrap';
 
-// XXX add styling here.
-export const Feedback = FormFeedback;
-// export const Feedback = styled(FormFeedback)`
-//   display: block;
-//   font-size: 12px;
-//   min-height: 12px;
-//   line-height: 12px;
-//   margin: 5px;
-// `;
+import styles from './feedback.module.css';
 
 const defaultErrorMap = {
   'blank': 'This must not be blank',
@@ -80,7 +72,7 @@ const FormInput = ({
       { help ? <FormText {...helpProps}>{help}</FormText> : '' }
       { check ? null : inputEl }
       { ' ' }
-      { errors && touched ? <Feedback>{errors}</Feedback> : <Feedback /> }
+      { errors && touched ? <FormFeedback className={styles.formFeedback}>{errors}</FormFeedback> : <FormFeedback /> }
       { ' ' }
     </FormGroup>
   );
@@ -90,6 +82,6 @@ FormInput.defaultProps = {
   errorMap: {}
 };
 
-FormInput.Feedback = Feedback;
+// FormInput.FormFeedback = FormFeedback;
 
 export default FormInput;

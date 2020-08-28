@@ -1,5 +1,6 @@
-// import { SubmissionError } from 'redux-form';
 // import { removeCookie } from 'redux-cookie';
+
+import apiRequest from '../../modules/apiRequest';
 
 import * as actionTypes from './actionTypes';
 import constants from "../constants";
@@ -78,11 +79,10 @@ function dispatchLoginAction(dispatch, action, { errorMessages }) {
     .catch(({ error }) => {
       const response = error.response;
       if (response && response.status === 401) {
-        // XXX
-        // throw new SubmissionError({
-        //   login: errorMessages.unauthorized,
-        //   password: errorMessages.unauthorized,
-        // });
+        throw new apiRequest.SubmissionError({
+          login: errorMessages.unauthorized,
+          password: errorMessages.unauthorized,
+        });
       }
       throw error;
     });

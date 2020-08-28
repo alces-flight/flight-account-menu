@@ -19,7 +19,7 @@ function SignInModal({
   signOnState,
   startSignUp,
 }) {
-  const { handleSubmit, handleInputChange, inputs } = useForm(login);
+  const { handleSubmit, handleInputChange, inputs, errors, touched } = useForm(login);
 
   return (
     <StandardModal
@@ -48,6 +48,10 @@ function SignInModal({
             onChange: handleInputChange,
             value: inputs.login,
           }}
+          meta={{
+            error: errors.login,
+            touched: touched.login,
+          }}
         />
         <FormInput
           label="Enter your password"
@@ -56,6 +60,10 @@ function SignInModal({
           input={{
             onChange: handleInputChange,
             value: inputs.password,
+          }}
+          meta={{
+            error: errors.password,
+            touched: touched.password,
           }}
         />
         <FormInput
@@ -67,6 +75,10 @@ function SignInModal({
           input={{
             onChange: handleInputChange,
             value: inputs.permanent,
+          }}
+          meta={{
+            error: errors.permanent,
+            touched: touched.permanent,
           }}
         />
         <button type="submit" className="d-none"></button>
