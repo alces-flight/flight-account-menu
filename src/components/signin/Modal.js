@@ -40,28 +40,35 @@ function SignInModal({
       toggle={hideLoginForm}
     >
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <FormInput
-            label="Enter your Flight username or email address"
-            name="login"
-            type="text"
-            input={{
-              onChange: handleInputChange,
-              value: inputs.login,
-            }}
-          />
-        </div>
-        <div className="form-group">
-          <FormInput
-            label="Enter your password"
-            name="password"
-            type="password"
-            input={{
-              onChange: handleInputChange,
-              value: inputs.password,
-            }}
-          />
-        </div>
+        <FormInput
+          label="Enter your Flight username or email address"
+          name="login"
+          type="text"
+          input={{
+            onChange: handleInputChange,
+            value: inputs.login,
+          }}
+        />
+        <FormInput
+          label="Enter your password"
+          name="password"
+          type="password"
+          input={{
+            onChange: handleInputChange,
+            value: inputs.password,
+          }}
+        />
+        <FormInput
+          check
+          help="Don't choose this on a shared or public computer"
+          label="Remember me"
+          name="permanent"
+          type="checkbox"
+          input={{
+            onChange: handleInputChange,
+            value: inputs.permanent,
+          }}
+        />
         <button type="submit" className="d-none"></button>
       </form>
 

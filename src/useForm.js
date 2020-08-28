@@ -10,7 +10,15 @@ const useForm = (callback) => {
   }
   function handleInputChange(event) {
     event.persist();
-    setInputs(inputs => ({...inputs, [event.target.name]: event.target.value}));
+    let newValue;
+    switch (event.target.type) {
+      case 'checkbox':
+      newValue = event.target.checked ? 1 : 0;
+        break;
+      default:
+        newValue = event.target.value;
+    }
+    setInputs(inputs => ({...inputs, [event.target.name]: newValue}));
   }
   return {
     handleSubmit,

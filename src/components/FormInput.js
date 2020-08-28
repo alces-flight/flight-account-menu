@@ -67,7 +67,7 @@ const FormInput = ({
   const errors = formattedErrors(error, completeErrorMap);
 
   return (
-    <FormGroup>
+    <FormGroup check={check}>
       { check ? inputEl : null }
       <Label
         check={check}
