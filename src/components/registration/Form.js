@@ -1,74 +1,107 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import registration from '../../modules/registration'; 
 
 import FormInput from '../FormInput';
 import TermsOfServiceAgreement from './TermsOfServiceAgreement';
 
-function RegistrationForm({ handleSubmit, handleInputChange, inputs }) {
+const UnexpectedFailureMessage = () => (
+  <p className="text-warning">
+    Unfortunately, there was an unexpected error while attempting to register
+    your account.  Please check your settings and try again. If the issue
+    continues, please let us know by sending an email to <a href="mailto:info@alces-flight.com">info@alces-flight.com</a>.
+  </p>
+);
+
+function RegistrationForm({
+  errors,
+  handleInputChange,
+  handleSubmit,
+  inputs,
+  touched,
+  unexpectedFailure,
+}) {
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-group">
-        <FormInput
-          label="Pick a username"
-          name="username"
-          input={{
-            onChange: handleInputChange,
-            value: inputs.username,
-          }}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <FormInput
-          name="email"
-          label="Enter your email address"
-          type="email"
-          required
-          input={{
-            onChange: handleInputChange,
-            value: inputs.email,
-          }}
-        />
-      </div>
-      <div className="form-group">
-        {/* XXX Add zxcvbn validation */}
-        <FormInput
-          label="Choose a password (6 or more characters)"
-          minLength={6}
-          name="password"
-          required
-          type="password"
-          // userInputs={[ inputs.email, inputs.username ]}
-          input={{
-            onChange: handleInputChange,
-            value: inputs.password,
-          }}
-        />
-      </div>
-      <div className="form-group">
-        <FormInput
-          name="passwordConfirmation"
-          label="Confirm password"
-          type="password"
-          required
-          input={{
-            onChange: handleInputChange,
-            value: inputs.passwordConfirmation,
-          }}
-        />
-      </div>
+      { unexpectedFailure ? <UnexpectedFailureMessage /> : null }
+      <FormInput
+        label="Pick a username"
+        name="username"
+        input={{
+          onChange: handleInputChange,
+          value: inputs.username,
+        }}
+        required
+      />
+      <FormInput
+        name="email"
+        label="Enter your email address"
+        type="email"
+        required
+        input={{
+          onChange: handleInputChange,
+          value: inputs.email,
+        }}
+      />
+      {/* XXX Add zxcvbn validation */}
+      <FormInput
+        label="Choose a password (6 or more characters)"
+        minLength={6}
+        name="password"
+        required
+        type="password"
+        // userInputs={[ inputs.email, inputs.username ]}
+        input={{
+          onChange: handleInputChange,
+          value: inputs.password,
+        }}
+      />
+      <FormInput
+        name="passwordConfirmation"
+        label="Confirm password"
+        type="password"
+        required
+        input={{
+          onChange: handleInputChange,
+          value: inputs.passwordConfirmation,
+        }}
+      />
 
       <TermsOfServiceAgreement
         handleInputChange={handleInputChange}
         inputs={inputs}
       />
 
-      <div className="form-group form-check">
-      </div>
-
+      <FormInput
+        check
+        help="The information you provide may be used to keep you informed
+        about our future products and events."
+        label={<span>
+          I wish to receive marketing information from Alces Flight.
+        </span>}
+        name='optedIntoMarketing'
+        type='checkbox'
+        input={{
+          onChange: handleInputChange,
+          value: inputs.optedIntoMarketing,
+        }}
+        meta={{
+          error: errors.optedIntoMarketing,
+          touched: touched.optedIntoMarketing,
+        }}
+      />
 
       <button type="submit" className="d-none"></button>
     </form>
   );
 }
 
-export default RegistrationForm;
+const enhance = connect(
+  createStructuredSelector({
+    unexpectedFailure: registration.selectors.unexpectedFailure,
+  }),
+);
+
+export default enhance(RegistrationForm);

@@ -24,13 +24,16 @@ const stateReducer = (state=DEFAULT_STATE, action) => {
 function errorReducer(state=null, { type, error }) {
   switch (type) {
     case apiRequest.rejected(actionTypes.REGISTER):
-      if (error.response.status === 500) {
+      if (error.status === 0 || error.response.status === 500) {
         return UNEXPECTED_ERROR;
       } else {
         return null;
       }
 
     case apiRequest.resolved(actionTypes.REGISTER):
+      return null;
+
+    case actionTypes.CANCEL_SIGN_UP:
       return null;
 
     default:

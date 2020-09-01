@@ -23,7 +23,7 @@ const RegistrationModal = ({
   showLoginForm,
   ...props
 }) => {
-  const { handleSubmit, handleInputChange, inputs } = useForm(register);
+  const { handleSubmit, handleInputChange, inputs, errors, touched } = useForm(register);
 
   const submitButton = (
     <StatefulButton
@@ -49,6 +49,8 @@ const RegistrationModal = ({
         handleSubmit={handleSubmit}
         handleInputChange={handleInputChange}
         inputs={inputs}
+        errors={errors}
+        touched={touched}
       />
 
       <hr/>
