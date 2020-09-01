@@ -17,7 +17,8 @@ export function register(registrationData) {
             url: `${constants.ssoBaseURL}/sign-up`,
             method: 'post',
             headers: {
-              "Content-Type": 'application/json'
+              "Accept": 'application/vnd.api+json,application/json',
+              "Content-Type": 'application/json',
             },
             data: {
               account: registrationData,

@@ -21,6 +21,7 @@ const defaultErrorMap = {
   'too_long': 'This is too long',
   'too_short': 'This is too short'
 };
+defaultErrorMap['must be accepted'] = defaultErrorMap['not_accepted'];
 
 function formattedErrors(error, completeErrorMap) {
   if (error == null) {

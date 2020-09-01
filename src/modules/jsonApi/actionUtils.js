@@ -13,7 +13,8 @@
  * https://github.com/dixieio/redux-json-api/blob/master/package.json
  *===========================================================================*/
 
-// import { SubmissionError } from 'redux-form';
+import apiRequest from '../../modules/apiRequest';
+
 import { incorrectError } from '../jsonApi/utils';
 import { getActionTypes } from 'redux-axios-middleware';
 
@@ -55,8 +56,7 @@ export function maybeThrowSubmissionError(errorAction) {
     formattedErrors = jsonApiErrors;
   }
 
-  // XXX
-  // throw new SubmissionError(formattedErrors);
+  throw new apiRequest.SubmissionError(formattedErrors);
 }
 
 export const notFoundError = {

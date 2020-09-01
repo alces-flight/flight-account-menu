@@ -7,6 +7,13 @@ const useForm = (callback) => {
   const [errors, setErrors] = useState({});
   const [touched, setTouched] = useState({});
 
+  function setAllTouched() {
+    Object.keys(inputs).reduce(
+      (accum, i) => {accum[i] = true; return accum},
+      {},
+    )
+  }
+
   function handleSubmit(event) {
     if (event) {
       event.preventDefault();
@@ -14,6 +21,7 @@ const useForm = (callback) => {
     callback(inputs).
       catch((e) => {
         if (e instanceof apiRequest.SubmissionError) {
+          setAllTouched()
           setErrors(e.errorMessageMap)
         } else {
           throw e

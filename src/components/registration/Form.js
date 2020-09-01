@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import registration from '../../modules/registration'; 
 
 import FormInput from '../FormInput';
-import TermsOfServiceAgreement from './TermsOfServiceAgreement';
+import TermsLabel from './TermsLabel';
 
 const UnexpectedFailureMessage = () => (
   <p className="text-warning">
@@ -33,6 +33,10 @@ function RegistrationForm({
           onChange: handleInputChange,
           value: inputs.username,
         }}
+        meta={{
+          error: errors.username,
+          touched: touched.username,
+        }}
         required
       />
       <FormInput
@@ -43,6 +47,10 @@ function RegistrationForm({
         input={{
           onChange: handleInputChange,
           value: inputs.email,
+        }}
+        meta={{
+          error: errors.email,
+          touched: touched.email,
         }}
       />
       {/* XXX Add zxcvbn validation */}
@@ -57,6 +65,10 @@ function RegistrationForm({
           onChange: handleInputChange,
           value: inputs.password,
         }}
+        meta={{
+          error: errors.password,
+          touched: touched.password,
+        }}
       />
       <FormInput
         name="passwordConfirmation"
@@ -67,11 +79,25 @@ function RegistrationForm({
           onChange: handleInputChange,
           value: inputs.passwordConfirmation,
         }}
+        meta={{
+          error: errors.passwordConfirmation,
+          touched: touched.passwordConfirmation,
+        }}
       />
 
-      <TermsOfServiceAgreement
-        handleInputChange={handleInputChange}
-        inputs={inputs}
+      <FormInput
+        check
+        name='terms'
+        label={<TermsLabel />}
+        type='checkbox'
+        input={{
+          onChange: handleInputChange,
+          value: inputs.terms,
+        }}
+        meta={{
+          error: errors.terms,
+          touched: touched.terms,
+        }}
       />
 
       <FormInput
