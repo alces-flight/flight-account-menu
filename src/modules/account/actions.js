@@ -1,5 +1,7 @@
 import omit from 'lodash/omit';
+
 import { maybeThrowSubmissionError } from "../jsonApi/actionUtils";
+import auth from '../auth';
 
 import constants from '../constants';
 
@@ -24,7 +26,7 @@ export const showConfirmationModal = (emailUpdated) => ({
   },
 });
 
-export function update(values, flightSsoUser) {
+export function update(values) {
   const patches = values.changingPassword ?
     values :
     omit(
@@ -50,6 +52,9 @@ export function update(values, flightSsoUser) {
               flightAppUrl: constants.FLIGHT_APP_URL,
             }
           }
+        },
+        loadingState: {
+          key: 'accountUpdate',
         }
       }
     };

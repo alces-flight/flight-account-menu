@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
+import account from '../../modules/account';
 import auth from '../../modules/auth';
 
 function SignedIn({ currentUser, dispatch, signedInLinks }) {
@@ -36,6 +37,7 @@ function SignedIn({ currentUser, dispatch, signedInLinks }) {
           href="#"
           className="nav nav-link dropdown-item"
           type="button"
+          onClick={ () => { dispatch(account.actions.showSettingsModal()); } }
         >
           My account
         </a>
