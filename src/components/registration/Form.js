@@ -1,11 +1,15 @@
 import React from 'react';
+import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useForm } from 'react-hook-form';
 
+import account from '../../modules/account';
 import registration from '../../modules/registration'; 
 
-import FormInput from '../FormInput';
+import FormInput from '../FormInputNew';
 import TermsLabel from './TermsLabel';
+import { resolver } from "../../utils/formValidationResolver";
 
 const UnexpectedFailureMessage = () => (
   <p className="text-warning">
@@ -16,73 +20,58 @@ const UnexpectedFailureMessage = () => (
 );
 
 function RegistrationForm({
-  errors,
-  handleInputChange,
-  handleSubmit,
-  inputs,
-  touched,
+  registerAccount,
   unexpectedFailure,
-}) {
+}, apiRef) {
+  const { register, handleSubmit, errors, formState, isSubmitting } = useForm({
+    mode: 'all',
+    resolver: resolver(account.validations.registrationValidator),
+  });
+  const { touched, isSubmitted } = formState;
+
+  // API exported by this component to allow for programatic submitting.
+  // This is so not the way React functional components are supposed to work,
+  // but it does work.
+  apiRef.current = {
+    submit: handleSubmit(registerAccount),
+    isSubmitting: isSubmitting,
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(registerAccount)}>
       { unexpectedFailure ? <UnexpectedFailureMessage /> : null }
       <FormInput
         label="Pick a username"
         name="username"
-        input={{
-          onChange: handleInputChange,
-          value: inputs.username,
-        }}
-        meta={{
-          error: errors.username,
-          touched: touched.username,
-        }}
-        required
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
       <FormInput
         name="email"
         label="Enter your email address"
         type="email"
-        required
-        input={{
-          onChange: handleInputChange,
-          value: inputs.email,
-        }}
-        meta={{
-          error: errors.email,
-          touched: touched.email,
-        }}
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
       {/* XXX Add zxcvbn validation */}
       <FormInput
         label="Choose a password (6 or more characters)"
         minLength={6}
         name="password"
-        required
         type="password"
-        // userInputs={[ inputs.email, inputs.username ]}
-        input={{
-          onChange: handleInputChange,
-          value: inputs.password,
-        }}
-        meta={{
-          error: errors.password,
-          touched: touched.password,
-        }}
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
       <FormInput
         name="passwordConfirmation"
         label="Confirm password"
         type="password"
-        required
-        input={{
-          onChange: handleInputChange,
-          value: inputs.passwordConfirmation,
-        }}
-        meta={{
-          error: errors.passwordConfirmation,
-          touched: touched.passwordConfirmation,
-        }}
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
 
       <FormInput
@@ -90,14 +79,9 @@ function RegistrationForm({
         name='terms'
         label={<TermsLabel />}
         type='checkbox'
-        input={{
-          onChange: handleInputChange,
-          value: inputs.terms,
-        }}
-        meta={{
-          error: errors.terms,
-          touched: touched.terms,
-        }}
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
 
       <FormInput
@@ -109,14 +93,9 @@ function RegistrationForm({
         </span>}
         name='optedIntoMarketing'
         type='checkbox'
-        input={{
-          onChange: handleInputChange,
-          value: inputs.optedIntoMarketing,
-        }}
-        meta={{
-          error: errors.optedIntoMarketing,
-          touched: touched.optedIntoMarketing,
-        }}
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
 
       <button type="submit" className="d-none"></button>
@@ -124,10 +103,18 @@ function RegistrationForm({
   );
 }
 
-const enhance = connect(
-  createStructuredSelector({
-    unexpectedFailure: registration.selectors.unexpectedFailure,
-  }),
+const enhance = compose(
+  connect(
+    createStructuredSelector({
+      unexpectedFailure: registration.selectors.unexpectedFailure,
+    }),
+    {
+      registerAccount: registration.actions.register,
+    },
+    null,
+    { forwardRef: true },
+  ),
+  React.forwardRef,
 );
 
 export default enhance(RegistrationForm);

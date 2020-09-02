@@ -3,13 +3,13 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import account from '../../modules/account';
 import auth from '../../modules/auth';
 import registration from '../../modules/registration'; 
 
 import RegistrationForm from './Form';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
-import useForm from '../../useForm';
 
 const registrationStages = registration.constants.registrationStages;
 const modalIsDisplayed = (stage) => stage !== registrationStages.NOT_STARTED;
@@ -17,20 +17,19 @@ const isSubmitting = (stage) => stage === registrationStages.SUBMITTING;
 
 const RegistrationModal = ({
   cancelSignUp,
-  // emailFromUrl,
-  register,
   registrationStage,
   showLoginForm,
   ...props
 }) => {
-  const { handleSubmit, handleInputChange, inputs, errors, touched } = useForm(register);
+  const formApi = React.useRef(null);
 
   const submitButton = (
     <StatefulButton
       className="btn btn-primary"
-      onClick={handleSubmit}
-      submitting={isSubmitting(registrationStage)}
+      onClick={() => formApi.current.submit() }
+      submitting={formApi.isSubmitting}
       submittingText="Signing up..."
+      type="submit"
     >
       Sign up
     </StatefulButton>
@@ -44,15 +43,7 @@ const RegistrationModal = ({
       title="Sign up to the Alces Flight Platform"
       toggle={cancelSignUp}
     >
-
-      <RegistrationForm
-        handleSubmit={handleSubmit}
-        handleInputChange={handleInputChange}
-        inputs={inputs}
-        errors={errors}
-        touched={touched}
-      />
-
+      <RegistrationForm ref={formApi} />
       <hr/>
       <span className="text-muted">
         Already have an account?{' '}
@@ -76,7 +67,6 @@ const enhance = compose(
     }),
     {
       cancelSignUp: registration.actions.cancelSignUp,
-      register: registration.actions.register,
       showLoginForm: auth.actions.showLoginForm,
       startSignUp: registration.actions.startSignUp,
     }

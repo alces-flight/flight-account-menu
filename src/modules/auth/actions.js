@@ -79,12 +79,14 @@ function dispatchLoginAction(dispatch, action, { errorMessages }) {
     .catch(({ error }) => {
       const response = error.response;
       if (response && response.status === 401) {
-        throw new apiRequest.SubmissionError({
-          login: errorMessages.unauthorized,
-          password: errorMessages.unauthorized,
-        });
+        return Promise.reject(
+          new apiRequest.SubmissionError({
+            login: errorMessages.unauthorized,
+            password: errorMessages.unauthorized,
+          })
+        );
       }
-      throw error;
+      return Promise.reject(error);
     });
 }
 

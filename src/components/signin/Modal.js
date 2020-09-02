@@ -5,85 +5,39 @@ import { createStructuredSelector } from 'reselect';
 import auth from '../../modules/auth';
 import registration from '../../modules/registration';
 
+import SignInForm from './Form';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
-import useForm from '../../useForm';
-import FormInput from '../FormInput';
 
 const modalIsDisplayed = (stage) => stage !== auth.constants.signOnStates.NOT_STARTED;
-const isSubmitting = (stage) => stage === auth.constants.signOnStates.SUBMITTING;
 
 function SignInModal({
   hideLoginForm,
-  login,
   signOnState,
   startSignUp,
 }) {
-  const { handleSubmit, handleInputChange, inputs, errors, touched } = useForm(login);
+  const formApi = React.useRef(null); 
+  const submitButton =(
+    <StatefulButton
+      className="btn btn-primary"
+      onClick={() => formApi.current.submit() }
+      submitting={formApi.isSubmitting}
+      style={{ minWidth: '52px' }}
+      type="submit"
+    >
+      Sign in
+    </StatefulButton>
+  )
 
   return (
     <StandardModal
-      buttons={(
-        <StatefulButton
-          className="btn btn-primary"
-          submitting={isSubmitting(signOnState)}
-          onClick={handleSubmit}
-          style={{ minWidth: '52px' }}
-          type="submit"
-        >
-          Sign in
-        </StatefulButton>
-      )}
+      buttons={submitButton}
       closeButtonText="Cancel"
       isOpen={modalIsDisplayed(signOnState)}
       title="Sign in to Flight"
       toggle={hideLoginForm}
     >
-      <form onSubmit={handleSubmit}>
-        <FormInput
-          label="Enter your Flight username or email address"
-          name="login"
-          type="text"
-          input={{
-            onChange: handleInputChange,
-            value: inputs.login,
-          }}
-          meta={{
-            error: errors.login,
-            touched: touched.login,
-          }}
-        />
-        <FormInput
-          label="Enter your password"
-          name="password"
-          type="password"
-          input={{
-            onChange: handleInputChange,
-            value: inputs.password,
-          }}
-          meta={{
-            error: errors.password,
-            touched: touched.password,
-          }}
-        />
-        <FormInput
-          check
-          help="Don't choose this on a shared or public computer"
-          label="Remember me"
-          name="permanent"
-          type="checkbox"
-          input={{
-            onChange: handleInputChange,
-            value: inputs.permanent,
-          }}
-          meta={{
-            error: errors.permanent,
-            touched: touched.permanent,
-          }}
-        />
-        <button type="submit" className="d-none"></button>
-      </form>
-
+      <SignInForm ref={formApi} />
       <hr/>
       <span className="text-muted">
         Don&rsquo;t have an account yet?{' '}
@@ -105,7 +59,6 @@ export default connect(
     signOnState: auth.selectors.signOnStateSelector
   }),
   {
-    login: auth.actions.login,
     hideLoginForm: auth.actions.hideLoginForm,
     startSignUp: registration.actions.startSignUp,
   }

@@ -1,17 +1,17 @@
-import * as actions from './actions';
 import * as actionTypes from './actionTypes';
-// import * as components from './components';
+import * as actions from './actions';
 import * as constants from './constants';
 import * as logic from './logic';
 import * as selectors from './selectors';
+import * as validations from './validations';
 import { createReducer } from './reducer';
 
 export default {
-  actions,
   actionTypes,
-  // ...components,
+  actions,
   constants,
   createReducer,
   logic,
-  selectors
+  selectors,
+  validations,
 };

@@ -7,9 +7,6 @@ import auth from '../../modules/auth';
 
 import useForm from '../../useForm';
 
-// import StandardModal from '../../../components/StandardModal';
-// import SubmitButton from '../../../components/ReduxFormSubmitButton';
-
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
 
@@ -41,6 +38,12 @@ const SettingsModal = ({
       toggle={closeModal}
     >
       Form
+        handleSubmit={handleSubmit}
+        handleInputChange={handleInputChange}
+        inputs={inputs}
+        errors={errors}
+        touched={touched}
+
     </StandardModal>
   );
 }
