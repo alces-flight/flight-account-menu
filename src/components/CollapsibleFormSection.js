@@ -1,12 +1,13 @@
 import React from 'react';
-import { Collapse, Label } from 'reactstrap';
-import { withProps } from 'recompose';
 import classNames from 'classnames';
+import { Collapse, Label } from 'reactstrap';
+import { compose } from 'recompose';
+import { withProps } from 'recompose';
 
 const Section = ({ children, isOpen, toggle, }) => {
   const icon = (
-    <i classNames={
-      classNames('fa', { 'chevron-up': isOpen, 'chevron-down': !isOpen })
+    <i className={
+      classNames('fa', { 'fa-chevron-up': isOpen, 'fa-chevron-down': !isOpen })
     }></i>
   );
 
@@ -22,12 +23,14 @@ const Section = ({ children, isOpen, toggle, }) => {
   );
 };
 
-const enhance = withProps(props => ({
-  isOpen: props.input.value,
-  toggle: (isOpen) => {
-    props.input.onChange(!isOpen);
-  }
-}));
+const enhance = compose(
+  withProps(props => ({
+    isOpen: props.isOpen,
+    toggle: (isOpen) => {
+      props.toggle(!isOpen);
+    }
+  })),
+);
 
 const EnhancedSection = enhance(Section);
 

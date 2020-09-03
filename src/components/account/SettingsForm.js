@@ -1,129 +1,132 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useForm } from 'react-hook-form';
 
 import auth from '../../modules/auth'; 
+import account from '../../modules/account'; 
+
+import CollapsibleFormSection from '../CollapsibleFormSection';
+import FormInput from '../FormInputNew';
+import { resolver, settingErrors } from "../../utils/formValidationResolver";
 
 const SettingsForm = ({
-  // handleSubmit,
-  // invalid,
-  // pristine,
-  // submitFailed,
-  // submitting,
-  // user,
-  errors,
-  handleInputChange,
-  handleSubmit,
-  inputs,
-  touched,
-  unexpectedFailure,
-}) => (
-  <form onSubmit={handleSubmit}>
-    {/*
+  initialValues,
+  baseUpdateAccount,
+  user,
+}, apiRef) => {
+  const [changingPassword, setChangingPassword] = useState(initialValues.changingPassword);
+
+  const {
+    getValues, register, handleSubmit, errors, formState, setError, setValue,
+  } = useForm({
+    defaultValues: initialValues,
+    mode: 'all',
+    resolver: resolver(account.validations.validator),
+  });
+  const { touched, isSubmitted } = formState;
+  const updateAccount = (data) => {
+    baseUpdateAccount({...data, changingPassword: changingPassword});
+  }
+  const submit = handleSubmit(settingErrors(updateAccount, setError));
+
+  // API exported by this component to allow for programatic submitting.
+  // This is so not the way React functional components are supposed to work,
+  // but it does work.
+  apiRef.current = {
+    submit: submit,
+    // isSubmitting: isSubmitting,
+  };
+
+  return (
+    <form onSubmit={submit}>
+      {/*
       submitFailed ? (
         <p className='text-warning'>
           Please correct the errors below and try again.
         </p>
       ) : null
       */}
-    <FormInput
-      label="User name"
-      name="username"
-      input={{
-        onChange: handleInputChange,
-        value: inputs.username,
-      }}
-      meta={{
-        error: errors.username,
-        touched: touched.username,
-      }}
-    />
-    <FormInput
-      label="Email address"
-      name="email"
-      type="email"
-      input={{
-        onChange: handleInputChange,
-        value: inputs.email,
-      }}
-      meta={{
-        error: errors.email,
-        touched: touched.email,
-      }}
-    />
-    <CollapsibleFormSection
-      input={{
-        onChange: handleInputChange,
-        value: inputs.changingPassword,
-      }}
-    >
       <FormInput
-        label="Enter your current password"
-        name="currentPassword"
-        type="password"
-        input={{
-          onChange: handleInputChange,
-          value: inputs.currentPassword,
-        }}
-        meta={{
-          error: errors.currentPassword,
-          touched: touched.currentPassword,
-        }}
+        label="User name"
+        name="username"
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
       <FormInput
-        label="Enter your new password"
-        minLength={6}
-        name="password"
-        userInputs={[ user.email, user.username ]}
-        validator={conditionalPasswordValidator}
-        input={{
-          onChange: handleInputChange,
-          value: inputs.password,
-        }}
-        meta={{
-          error: errors.password,
-          touched: touched.password,
-        }}
+        label="Email address"
+        name="email"
+        type="email"
+        ref={register}
+        formErrors={errors}
+        formMeta={formState}
       />
-      <FormInput
-        label="Confirm your new password"
-        name="passwordConfirmation"
-        type="password"
-        input={{
-          onChange: handleInputChange,
-          value: inputs.passwordConfirmation,
-        }}
-        meta={{
-          error: errors.passwordConfirmation,
-          touched: touched.passwordConfirmation,
-        }}
-      />
-    </CollapsibleFormSection>
-  </form>
-);
+      <CollapsibleFormSection
+        name="changinPassword"
+        isOpen={changingPassword}
+        toggle={() => setChangingPassword(!changingPassword)}
+      >
+        <FormInput
+          label="Enter your current password"
+          name="currentPassword"
+          type="password"
+          ref={register}
+          formErrors={errors}
+          formMeta={formState}
+        />
+        <FormInput
+          label="Enter your new password"
+          minLength={6}
+          name="password"
+          type="password"
+          ref={register}
+          formErrors={errors}
+          formMeta={formState}
+          // userInputs={[ user.email, user.username ]}
+          // validator={conditionalPasswordValidator}
+        />
+        <FormInput
+          label="Confirm your new password"
+          name="passwordConfirmation"
+          type="password"
+          ref={register}
+          formErrors={errors}
+          formMeta={formState}
+        />
+        </CollapsibleFormSection>
+    </form>
+  );
+}
 
-const enhance = a => a;
-// const enhance = compose(
-//   connect(
-//     (state) => {
-//       const user = auth.selectors.currentUserSelector(state);
-//       if (user == null) {
-//         return {
-//           initialValues: {
-//             changingPassword: false
-//           },
-//         };
-//       }
-//       return {
-//         initialValues: {
-//           changingPassword: false,
-//           username: user.username,
-//           email: user.email,
-//         },
-//         user: user,
-//       };
-//     },
-//   ),
-// );
+const enhance = compose(
+  connect(
+    (state) => {
+      const user = auth.selectors.currentUserSelector(state);
+      if (user == null) {
+        return {
+          initialValues: {
+            changingPassword: false
+          },
+        };
+      }
+      return {
+        initialValues: {
+          changingPassword: false,
+          username: user.username,
+          email: user.email,
+        },
+        user: user,
+      };
+    },
+    {
+      baseUpdateAccount: account.actions.update,
+    },
+    null,
+    { forwardRef: true },
+  ),
+  React.forwardRef,
+);
 
 export default enhance(SettingsForm);

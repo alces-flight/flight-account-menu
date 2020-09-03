@@ -45,6 +45,7 @@ export function update(values) {
             url: `${constants.ssoBaseURL}/accounts`,
             method: 'patch',
             headers: {
+              "Accept": 'application/vnd.api+json,application/json',
               "Content-Type": 'application/json'
             },
             data: {

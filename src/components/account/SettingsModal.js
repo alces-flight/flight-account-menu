@@ -7,6 +7,7 @@ import auth from '../../modules/auth';
 
 import useForm from '../../useForm';
 
+import Form from './SettingsForm';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
 
@@ -17,33 +18,27 @@ const SettingsModal = ({
   submission,
   updateAccount,
 }) => {
-  const { handleSubmit, handleInputChange, inputs, errors, touched } = useForm(updateAccount);
+  const formApi = React.useRef(null); 
+  const submitButton =(
+    <StatefulButton
+      className="btn btn-primary"
+      onClick={() => formApi.current.submit() }
+      submitting={formApi.isSubmitting}
+      type="submit"
+    >
+      Update
+    </StatefulButton>
+  )
 
   return (
     <StandardModal
-      buttons={(
-        <StatefulButton
-          className="btn btn-primary"
-          submitting={submission.pending}
-          onClick={handleSubmit}
-          style={{ minWidth: '52px' }}
-          type="submit"
-        >
-          Update
-        </StatefulButton>
-      )}
+      buttons={submitButton}
       isOpen={isOpen}
       size="lg"
       title="Update your account details"
       toggle={closeModal}
     >
-      Form
-        handleSubmit={handleSubmit}
-        handleInputChange={handleInputChange}
-        inputs={inputs}
-        errors={errors}
-        touched={touched}
-
+      <Form ref={formApi} />
     </StandardModal>
   );
 }
@@ -55,7 +50,5 @@ export default connect(
   }),
   {
     closeModal: account.actions.hideSettingsModal,
-    updateAccount: account.actions.update,
   }
 )(SettingsModal);
-
