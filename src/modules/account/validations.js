@@ -23,6 +23,7 @@ export const validator = v.createValidator({
   currentPassword: conditionalPasswordValidator,
   // password validation is connected by the PasswordField component. This
   // allows easy access to the zxcvbn password score.
+  password: conditionalPasswordValidator,
   passwordConfirmation: conditionalPasswordConfirmationValidator,
 });
 
@@ -31,6 +32,7 @@ export const registrationValidator = v.createValidator({
   email: auth.validations.emailValidator,
   // password validation is connected by the PasswordField component. This
   // allows easy access to the zxcvbn password score.
+  password: conditionalPasswordValidator,
   passwordConfirmation: passwordConfirmationValidator,
   terms: [v.accepted],
 });

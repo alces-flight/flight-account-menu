@@ -23,7 +23,9 @@ const SettingsForm = ({
   } = useForm({
     defaultValues: initialValues,
     mode: 'all',
-    resolver: resolver(account.validations.validator),
+    resolver: resolver((data) => {
+      return account.validations.validator({...data, changingPassword: changingPassword});
+    }),
   });
   const { touched, isSubmitted } = formState;
   const updateAccount = (data) => (
