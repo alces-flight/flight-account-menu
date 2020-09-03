@@ -26,9 +26,9 @@ const SettingsForm = ({
     resolver: resolver(account.validations.validator),
   });
   const { touched, isSubmitted } = formState;
-  const updateAccount = (data) => {
-    baseUpdateAccount({...data, changingPassword: changingPassword});
-  }
+  const updateAccount = (data) => (
+    baseUpdateAccount({...data, changingPassword: changingPassword})
+  )
   const submit = handleSubmit(settingErrors(updateAccount, setError));
 
   // API exported by this component to allow for programatic submitting.
@@ -36,11 +36,11 @@ const SettingsForm = ({
   // but it does work.
   apiRef.current = {
     submit: submit,
-    // isSubmitting: isSubmitting,
   };
 
   return (
     <form onSubmit={submit}>
+      <button type="submit" className="d-none"></button>
       {/*
       submitFailed ? (
         <p className='text-warning'>
@@ -95,7 +95,7 @@ const SettingsForm = ({
           formErrors={errors}
           formMeta={formState}
         />
-        </CollapsibleFormSection>
+      </CollapsibleFormSection>
     </form>
   );
 }

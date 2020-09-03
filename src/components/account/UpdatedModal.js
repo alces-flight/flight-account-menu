@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import StandardModal from '../../../components/StandardModal';
+import account from '../../modules/account';
 
-import * as selectors from '../selectors';
-import * as actions from '../actions';
+import StandardModal from '../StandardModal';
 
-const AccountUpdatedModal = ({
+const UpdatedModal = ({
   closeModal,
   wasEmailUpdated,
   isOpen,
@@ -33,17 +32,17 @@ const AccountUpdatedModal = ({
   );
 }
 
-AccountUpdatedModal.propTypes = {
+UpdatedModal.propTypes = {
   closeModal: PropTypes.func,
   isOpen: PropTypes.bool.isRequired,
 };
 
 export default connect(
   createStructuredSelector({
-    isOpen: selectors.isConfirmationModalShowing,
-    wasEmailUpdated: selectors.wasEmailUpdated,
+    isOpen: account.selectors.isConfirmationModalShowing,
+    wasEmailUpdated: account.selectors.wasEmailUpdated,
   }),
   {
-    closeModal: actions.hideConfirmationModal,
+    closeModal: account.actions.hideConfirmationModal,
   }
-)(AccountUpdatedModal);
+)(UpdatedModal);

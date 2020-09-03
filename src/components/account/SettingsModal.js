@@ -23,7 +23,7 @@ const SettingsModal = ({
     <StatefulButton
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
-      submitting={formApi.isSubmitting}
+      submitting={submission.pending}
       type="submit"
     >
       Update

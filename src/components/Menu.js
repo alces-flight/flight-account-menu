@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import auth from '../modules/auth';
 
+import AccountUpdatedModal from './account/UpdatedModal';
 import AccountSettingsModal from './account/SettingsModal';
 import PrivacyPolicyModal from './registration/PrivacyPolicyModal';
 import RegistrationModal from './registration/Modal';
@@ -18,6 +19,7 @@ function Menu({ currentUser, signedInLinks }) {
     return (
       <React.Fragment>
         <WelcomeMessageModal />
+        <AccountUpdatedModal />
         <AccountSettingsModal />
 
         <SignedIn
