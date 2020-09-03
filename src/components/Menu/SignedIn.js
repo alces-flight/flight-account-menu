@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import account from '../../modules/account';
@@ -8,6 +9,7 @@ function SignedIn({ currentUser, dispatch, signedInLinks }) {
   const avatarUrl = currentUser.avatarUrl ?
     currentUser.avatarUrl :
     `https://api.adorable.io/avatars/48/${currentUser.email}.png`;
+
   return (
     <div className="dropdown align-self-center">
       <a className="nav nav-link dropdown-toggle px-4 d-inline-flex"
@@ -18,14 +20,21 @@ function SignedIn({ currentUser, dispatch, signedInLinks }) {
         href="#"
       >
         <span className="align-self-center mr-2" style={{lineHeight: '1'}}>
-          <span className="font-weight-bold">
-            { currentUser.name || <span>&nbsp;</span> }
+          <span
+            className={
+              classNames(
+                "font-weight-bold user-name",
+                { 'user-name--null': currentUser.name == null },
+              )
+            }
+          >
+            { currentUser.name || <React.Fragment>&nbsp;</React.Fragment> }
           </span><br />
-          <span className="d-inline-block float-right">
+          <span className="d-inline-block float-right user-username">
             { currentUser.username }
           </span>
         </span>
-        <span className="align-self-center">
+        <span className="align-self-center user-avatar">
           <img src={avatarUrl} />
         </span>
       </a>
