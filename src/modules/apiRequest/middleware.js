@@ -15,7 +15,7 @@ function makeClient(options={}) {
       Accept: [
         'application/vnd.api+json',
         'application/json'
-      ],
+      ].join(','),
       'Content-Type': 'application/json'
     },
     ...options,
