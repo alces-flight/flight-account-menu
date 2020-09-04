@@ -7,6 +7,7 @@ import auth from '../modules/auth';
 import AccountSettingsModal from './account/SettingsModal';
 import AccountUpdatedModal from './account/UpdatedModal';
 import CompleteRecoveryModal from './accountRecovery/ResetPasswordModal';
+import ConfirmationModal from './confirmation/Modal';
 import PrivacyPolicyModal from './registration/PrivacyPolicyModal';
 import RegistrationModal from './registration/Modal';
 import SignInModal from './signin/Modal';
@@ -34,6 +35,7 @@ function Menu({ currentUser, signedInLinks }) {
   return (
     <React.Fragment>
       <CompleteRecoveryModal />
+      <ConfirmationModal />
       <PrivacyPolicyModal />
       <RegistrationModal />
       <SignInModal />

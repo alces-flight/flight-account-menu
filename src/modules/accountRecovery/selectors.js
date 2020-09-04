@@ -30,5 +30,8 @@ const tokenFromLocation = (location) => {
 };
 
 export function tokenFromUrl(state) {
+  if (typeof window === 'undefined') {
+    return null;
+  }
   return tokenFromLocation(window.location);
 }
