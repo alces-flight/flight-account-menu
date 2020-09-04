@@ -21,10 +21,6 @@ const emailFromLocation = (location) => {
   }
 };
 
-export const signupEmailFromUrl = createSelector(
-  (state) => state.router,
-
-  (router) => {
-    return emailFromLocation(router.location);
-  },
-);
+export function signupEmailFromUrl(state) {
+  return emailFromLocation(window.location);
+}

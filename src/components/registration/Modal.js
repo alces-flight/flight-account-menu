@@ -1,5 +1,5 @@
 import React from 'react';
-import { compose } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -62,7 +62,7 @@ const RegistrationModal = ({
 const enhance = compose(
   connect(
     createStructuredSelector({
-      // emailFromUrl: registration.selectors.signupEmailFromUrl,
+      emailFromUrl: registration.selectors.signupEmailFromUrl,
       registrationStage: registration.selectors.registrationState,
     }),
     {
@@ -72,13 +72,13 @@ const enhance = compose(
     }
   ),
 
-  // lifecycle({
-  //   componentDidMount: function componentDidMount() {
-  //     if (this.props.emailFromUrl) {
-  //       this.props.startSignUp();
-  //     }
-  //   },
-  // }),
+  lifecycle({
+    componentDidMount: function componentDidMount() {
+      if (this.props.emailFromUrl) {
+        this.props.startSignUp();
+      }
+    },
+  }),
 );
 
 export default enhance(RegistrationModal);
