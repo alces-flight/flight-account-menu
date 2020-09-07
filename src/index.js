@@ -41,8 +41,6 @@ export const store = createStore(
   composeEnhancers(
     applyMiddleware(
       apiRequest.middleware,
-      // XXX Does this need adding back in?
-      // createCookieMiddleware(cookies),
       thunk,
     )
   )
