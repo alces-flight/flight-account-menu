@@ -56,7 +56,7 @@ export function maybeThrowSubmissionError(errorAction) {
     formattedErrors = jsonApiErrors;
   }
 
-  throw new apiRequest.SubmissionError(formattedErrors);
+  return Promise.reject(new apiRequest.SubmissionError(formattedErrors));
 }
 
 export const notFoundError = {

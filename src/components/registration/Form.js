@@ -9,7 +9,7 @@ import registration from '../../modules/registration';
 
 import FormInput from '../FormInput';
 import TermsLabel from './TermsLabel';
-import { resolver } from "../../utils/formValidationResolver";
+import { resolver, settingErrors } from "../../utils/formValidationResolver";
 
 const UnexpectedFailureMessage = () => (
   <p className="text-warning">
@@ -23,22 +23,23 @@ function RegistrationForm({
   registerAccount,
   unexpectedFailure,
 }, apiRef) {
-  const { register, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors, formState, setError } = useForm({
     mode: 'all',
     resolver: resolver(account.validations.registrationValidator),
   });
   const { touched, isSubmitted, isSubmitting } = formState;
+  const submit = handleSubmit(settingErrors(registerAccount, setError));
 
   // API exported by this component to allow for programatic submitting.
   // This is so not the way React functional components are supposed to work,
   // but it does work.
   apiRef.current = {
-    submit: handleSubmit(registerAccount),
+    submit: submit,
     isSubmitting: isSubmitting,
   };
 
   return (
-    <form onSubmit={handleSubmit(registerAccount)}>
+    <form onSubmit={submit}>
       { unexpectedFailure ? <UnexpectedFailureMessage /> : null }
       <FormInput
         label="Pick a username"
