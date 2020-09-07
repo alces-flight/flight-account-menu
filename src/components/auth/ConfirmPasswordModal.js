@@ -1,14 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import StandardModal from '../../../components/StandardModal';
-import SubmitButton from '../../../components/ReduxFormSubmitButton';
+import auth from '../../modules/auth';
 
-import * as actions from '../actions';
-import * as selectors from "../selectors";
 import ConfirmPasswordForm from './ConfirmPasswordForm';
+import StandardModal from '../StandardModal';
+import StatefulButton from '../StatefulButton';
 
 const Explanation = ({ reason }) => {
   switch (reason) {
@@ -32,26 +30,28 @@ const Explanation = ({ reason }) => {
   }
 };
 
-Explanation.propTypes = {
-  reason: PropTypes.oneOf(['aboutToExpire', 'matured', 'unknown']).isRequired,
-};
-
 const ConfirmPasswordModal = ({
   isOpen,
   reason,
   toggle,
 }) => {
+  const formApi = React.useRef(null); 
+  const submitButton = (
+    <StatefulButton
+      className="btn btn-primary"
+      submittingText="Signing in..."
+      onClick={() => formApi.current.submit() }
+      submitting={formApi.current && formApi.current.submitting}
+    >
+      Submit
+    </StatefulButton>
+  );
+
+  console.log('formApi.current && formApi.current.submitting:', formApi.current && formApi.current.submitting);  // eslint-disable-line no-console
+
   return (
     <StandardModal
-      buttons={(
-        <SubmitButton
-          color="success"
-          form="confirmPassword"
-          submittingText="Signing in..."
-        >
-          Submit
-        </SubmitButton>
-      )}
+      buttons={submitButton}
       closeButtonText="Cancel"
       isOpen={isOpen}
       size="lg"
@@ -59,29 +59,23 @@ const ConfirmPasswordModal = ({
       toggle={toggle}
     >
       <Explanation reason={reason} />
-      <ConfirmPasswordForm />
+      <ConfirmPasswordForm ref={formApi} />
     </StandardModal>
   );
 };
 
-ConfirmPasswordModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  reason: PropTypes.oneOf(['aboutToExpire', 'matured', 'unknown']).isRequired,
-  toggle: PropTypes.func.isRequired,
-};
-
 export default connect(
   createStructuredSelector({
-    isOpen: selectors.confirmPassword.isModalOpen,
+    isOpen: auth.selectors.confirmPassword.isModalOpen,
     reason: (state) => {
-      const aboutToExpire = selectors.ssoTokenAboutToExpire(state);
-      const isMatured = selectors.ssoTokenMatured(state);
+      const aboutToExpire = auth.selectors.ssoTokenAboutToExpire(state);
+      const isMatured = auth.selectors.ssoTokenMatured(state);
       if (aboutToExpire) { return 'aboutToExpire'; }
       if (isMatured) { return 'matured'; }
       return 'unknown';
     },
   }),
   {
-    toggle: () => actions.hideConfirmPasswordForm({ manuallyDismissed: true }),
+    toggle: () => auth.actions.hideConfirmPasswordForm({ manuallyDismissed: true }),
   }
 )(ConfirmPasswordModal);

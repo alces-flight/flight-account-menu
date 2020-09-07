@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore, compose } from 'redux';
 
+import createLogics from './logics';
 import createReducer from './reducer';
 
 import apiRequest from './modules/apiRequest';
@@ -24,6 +25,8 @@ export const store = createStore(
     )
   )
 );
+
+createLogics(store);
 
 export const AccountMenu = ({ signedInLinks }) => {
   return (

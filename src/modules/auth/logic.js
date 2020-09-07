@@ -4,7 +4,7 @@ import * as actions from './actions';
 import * as selectors from './selectors';
 import { ssoTokenMaturity, ssoTokenExpirationLeaway } from './constants';
 
-const debug = mkDebug('FlightReactware:auth:logic');
+const debug = mkDebug('flight-account-menu:auth:logic');
 const maxTimeoutDelay = Math.pow(2, 31);
 
 class SessionChecker {

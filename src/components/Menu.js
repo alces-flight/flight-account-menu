@@ -8,6 +8,7 @@ import AccountSettingsModal from './account/SettingsModal';
 import AccountUpdatedModal from './account/UpdatedModal';
 import CompleteRecoveryModal from './accountRecovery/ResetPasswordModal';
 import ConfirmationModal from './confirmation/Modal';
+import ConfirmPasswordModal from './auth/ConfirmPasswordModal';
 import PrivacyPolicyModal from './registration/PrivacyPolicyModal';
 import RegistrationModal from './registration/Modal';
 import SignInModal from './signin/Modal';
@@ -24,6 +25,7 @@ function Menu({ currentUser, signedInLinks }) {
         <WelcomeMessageModal />
         <AccountUpdatedModal />
         <AccountSettingsModal />
+        <ConfirmPasswordModal />
 
         <SignedIn
           currentUser={currentUser}
