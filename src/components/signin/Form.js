@@ -14,7 +14,7 @@ function Form({ login, }, apiRef) {
     mode: 'all',
     resolver: resolver(auth.validations.signInValidator),
   });
-  const { touched, isSubmitted, isSubmitting } = formState;
+  const { touched, isSubmitted } = formState;
   const submit = handleSubmit(settingErrors(login, setError));
 
   // API exported by this component to allow for programatic submitting.
@@ -22,7 +22,6 @@ function Form({ login, }, apiRef) {
   // but it does work.
   apiRef.current = {
     submit: submit,
-    isSubmitting: isSubmitting,
   };
 
   return (

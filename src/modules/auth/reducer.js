@@ -4,6 +4,7 @@ import pick from 'lodash/pick';
 import lodash from 'lodash';
 
 import apiRequest from "../../modules/apiRequest";
+import loadingStates from '../loadingStates';
 import registration from "../../modules/registration";
 import { createModalReducer } from '../../utils/modals';
 
@@ -107,6 +108,13 @@ const subReducers = {
         apiRequest.resolved(actionTypes.CONFIRM_PASSWORD),
       ],
     ),
+    meta: combineReducers({
+      loadingState: loadingStates.reducer({
+        pending: actionTypes.CONFIRM_PASSWORD,
+        resolved: apiRequest.resolved(actionTypes.CONFIRM_PASSWORD),
+        rejected: apiRequest.rejected(actionTypes.CONFIRM_PASSWORD),
+      }),
+    }),
   }),
 };
 

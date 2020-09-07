@@ -23,7 +23,7 @@ function SignInModal({
     <StatefulButton
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
-      submitting={formApi.current && formApi.current.isSubmitting}
+      submitting={signOnState === auth.constants.signOnStates.SUBMITTING}
       style={{ minWidth: '52px' }}
       type="submit"
     >

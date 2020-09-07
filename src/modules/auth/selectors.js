@@ -1,8 +1,10 @@
 import { createSelector } from 'reselect';
 
+import loadingStates from '../loadingStates';
 import { createModalSelector, createModalDataSelector } from '../../utils/modals';
 
 import { NAME, ssoTokenMaturity, ssoTokenExpirationLeaway } from './constants';
+
 
 const authState = state => state[NAME];
 const confirmPasswordModalData = createModalDataSelector(
@@ -87,5 +89,11 @@ export const confirmPassword = {
   manuallyShown: createSelector(
     confirmPasswordModalData,
     (data) => data.payload == null ? undefined : data.payload.manuallyShown,
+  ),
+  retrieval: createSelector(
+    state => ( state[NAME] || {} )['confirmPassword'],
+    state => 'confirmPassword',
+
+    loadingStates.selectors.retrieval,
   ),
 };

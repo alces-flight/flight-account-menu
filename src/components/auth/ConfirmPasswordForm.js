@@ -18,7 +18,7 @@ const ConfirmPasswordForm = ({
     mode: 'all',
     resolver: resolver(auth.validations.confirmPasswordValidator),
   });
-  const { touched, isSubmitted, isSubmitting } = formState;
+  const { touched, isSubmitted } = formState;
   const confirmPassword = (data) => rawConfirmPassword(data, user)
   const submit = handleSubmit(settingErrors(confirmPassword, setError));
 
@@ -27,7 +27,6 @@ const ConfirmPasswordForm = ({
   // but it does work.
   apiRef.current = {
     submit: submit,
-    submitting: isSubmitting,
   };
 
   return (

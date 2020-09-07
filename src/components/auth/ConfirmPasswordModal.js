@@ -33,6 +33,7 @@ const Explanation = ({ reason }) => {
 const ConfirmPasswordModal = ({
   isOpen,
   reason,
+  retrieval,
   toggle,
 }) => {
   const formApi = React.useRef(null); 
@@ -41,13 +42,11 @@ const ConfirmPasswordModal = ({
       className="btn btn-primary"
       submittingText="Signing in..."
       onClick={() => formApi.current.submit() }
-      submitting={formApi.current && formApi.current.submitting}
+      submitting={retrieval.pending}
     >
       Submit
     </StatefulButton>
   );
-
-  console.log('formApi.current && formApi.current.submitting:', formApi.current && formApi.current.submitting);  // eslint-disable-line no-console
 
   return (
     <StandardModal
@@ -67,6 +66,7 @@ const ConfirmPasswordModal = ({
 export default connect(
   createStructuredSelector({
     isOpen: auth.selectors.confirmPassword.isModalOpen,
+    retrieval: auth.selectors.confirmPassword.retrieval,
     reason: (state) => {
       const aboutToExpire = auth.selectors.ssoTokenAboutToExpire(state);
       const isMatured = auth.selectors.ssoTokenMatured(state);

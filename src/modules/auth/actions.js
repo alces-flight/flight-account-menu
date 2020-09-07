@@ -103,6 +103,12 @@ export const confirmPassword = (data, user) => dispatch => {
       permanent: user.permanent
     }
   );
+  action.meta = {
+    ...action.meta,
+    loadingState: {
+      key: 'confirmPassword',
+    },
+  }
 
   return dispatchLoginAction(dispatch, action, {
     errorMessages: {

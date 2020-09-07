@@ -27,7 +27,7 @@ const RegistrationModal = ({
     <StatefulButton
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
-      submitting={formApi.current && formApi.current.isSubmitting}
+      submitting={isSubmitting(registrationStage)}
       submittingText="Signing up..."
       type="submit"
     >
