@@ -88,26 +88,20 @@ class SessionChecker {
       debug('Clearing old timeout');
       clearTimeout(this.timeoutId);
     }
-    const delay = this.getTimeoutTime(ssoUser);
-    if (this.shouldSetTimeout(delay)) {
-      this.setTimeout(dispatch, getState, ssoUser, delay);
-    } else {
-      debug('Skipping timeout. Too far into the future');
-    }
+    const delay = this.clampTimeout(this.getTimeoutTime(ssoUser));
+    this.setTimeout(dispatch, getState, ssoUser, delay);
     this.previousTimestamp = currentTimestamp;
   }
 
-  shouldSetTimeout(delay) {
+  clampTimeout(delay) {
     // Some browsers don't like having a timeout more than 2^31 milliseconds
-    // into the future. 2^31 milliseconds is more than 24 days, so we're going
-    // to simply ignore those timeouts.
-    //
-    // The expected use for this module will have the checkers run every time
-    // a redux action is dispatched, at which point we'll retest if a timeout
-    // needs setting.  So in the expected use, we're only going to be bitten
-    // by this if the browser window stays open for over 24 days without any
-    // redux actions being dispatched.
-    return delay < maxTimeoutDelay;
+    // into the future.
+    if (delay >= maxTimeoutDelay) {
+      debug('Clamping timeout to %d', maxTimeoutDelay);
+      return maxTimeoutDelay - 1
+    } else {
+      return delay;
+    }
   }
 
   setTimeout(dispatch, getState, ssoUser, delay) {
