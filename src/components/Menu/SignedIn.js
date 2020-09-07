@@ -1,6 +1,7 @@
 import React from 'react'
 import classNames from 'classnames';
 import { connect } from 'react-redux';
+import jsGravatar from 'js-gravatar';
 
 import account from '../../modules/account';
 import auth from '../../modules/auth';
@@ -8,7 +9,7 @@ import auth from '../../modules/auth';
 function SignedIn({ currentUser, dispatch, signedInLinks }) {
   const avatarUrl = currentUser.avatarUrl ?
     currentUser.avatarUrl :
-    `https://api.adorable.io/avatars/48/${currentUser.email}.png`;
+    jsGravatar({ email: currentUser.email, size: 48, defaultImage: 'identicon' });
 
   return (
     <div className="dropdown align-self-center">
