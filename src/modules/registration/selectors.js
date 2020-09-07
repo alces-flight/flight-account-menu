@@ -6,8 +6,6 @@ import { createModalSelector } from '../../utils/modals';
 import { NAME, UNEXPECTED_ERROR } from './constants';
 
 export const registrationState = (state) => state[NAME].state;
-export const isTermsModalShowing = createModalSelector(NAME, 'terms');
-export const isPrivacyPolicyModalShowing = createModalSelector(NAME, 'privacyPolicy');
 export const isWelcomeMessageModalShowing = createModalSelector(NAME, 'welcomeMessage');
 export const unexpectedFailure = (state) => state[NAME].error === UNEXPECTED_ERROR;
 

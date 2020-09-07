@@ -1,29 +1,24 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-import silenceEvents from '../../utils/silenceEvents';
-import registration from '../../modules/registration'; 
-
-const TermsLabel = ({ onShowPrivacyPolicy, onShowTerms }) => (
+const TermsLabel = () => (
   <span>
     I agree to the{' '}
     <a
-      href="#"
-      onClick={onShowTerms}
+      href="/terms"
+      rel="noopener noreferrer"
+      target="_blank"
     >
       Terms of Service
     </a>
     {' '}and{' '}
     <a
-      href="#"
-      onClick={onShowPrivacyPolicy}
+      href="/privacy"
+      rel="noopener noreferrer"
+      target="_blank"
     >
       Privacy Policy
     </a>.
   </span>
 );
 
-export default connect(null, {
-  onShowPrivacyPolicy: silenceEvents(registration.actions.showPrivacyPolicyModal),
-  onShowTerms: silenceEvents(registration.actions.showTermsModal),
-})(TermsLabel);
+export default TermsLabel;

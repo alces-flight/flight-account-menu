@@ -39,22 +39,6 @@ export const cancelSignUp = () => ({
   type: actionTypes.CANCEL_SIGN_UP
 });
 
-export const showTermsModal = () => ({
-  type: actionTypes.TERMS_SHOWN,
-});
-
-export const hideTermsModal = () => ({
-  type: actionTypes.TERMS_HIDDEN,
-});
-
-export const showPrivacyPolicyModal = () => ({
-  type: actionTypes.PRIVACY_POLICY_SHOWN,
-});
-
-export const hidePrivacyPolicyModal = () => ({
-  type: actionTypes.PRIVACY_POLICY_HIDDEN,
-});
-
 export const hideWelcomeMessageModal = () => ({
   type: actionTypes.WELCOME_MESSAGE_HIDDEN,
 });

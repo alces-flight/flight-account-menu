@@ -44,14 +44,6 @@ function errorReducer(state=null, { type, error }) {
 export default combineReducers({
   state: stateReducer,
   error: errorReducer,
-  terms: createModalReducer(
-    actionTypes.TERMS_SHOWN,
-    actionTypes.TERMS_HIDDEN,
-  ),
-  privacyPolicy: createModalReducer(
-    actionTypes.PRIVACY_POLICY_SHOWN,
-    actionTypes.PRIVACY_POLICY_HIDDEN,
-  ),
   welcomeMessage: createModalReducer(
     apiRequest.resolved(actionTypes.REGISTER),
     actionTypes.WELCOME_MESSAGE_HIDDEN,
