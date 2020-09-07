@@ -1,6 +1,14 @@
 /* add css module styles here (optional) */
 
-.alignedButton {
+.inlineButton {
     padding: 0;
     vertical-align: unset;
+}
+
+.userBlock {
+    line-height: 1;
+}
+
+.signedOutButton {
+    margin-top: 12px;
 }

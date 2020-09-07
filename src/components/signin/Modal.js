@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -9,6 +10,8 @@ import registration from '../../modules/registration';
 import SignInForm from './Form';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
+
+import styles from '../../styles.module.css';
 
 const modalIsDisplayed = (stage) => stage !== auth.constants.signOnStates.NOT_STARTED;
 
@@ -24,7 +27,6 @@ function SignInModal({
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
       submitting={signOnState === auth.constants.signOnStates.SUBMITTING}
-      style={{ minWidth: '52px' }}
       type="submit"
     >
       Sign in
@@ -45,7 +47,7 @@ function SignInModal({
         Don&rsquo;t have an account yet?{' '}
       </span>
       <button
-        className="btn btn-link p-0 pb-1"
+        className={classNames("btn btn-link", styles.inlineButton)}
         onClick={() => {hideLoginForm() ; startSignUp();}}
         tabIndex={1}
       >
@@ -55,9 +57,8 @@ function SignInModal({
       <span className="text-muted">
         Forgot your password?{' '}
         <button
-          className="btn btn-link"
+          className={classNames("btn btn-link", styles.inlineButton)}
           onClick={() => {hideLoginForm(); startAccountRecovery();}}
-          style={{ padding: 0, paddingBottom: '0.25rem' }}
           tabIndex={1}
         >
           Start recovering your account

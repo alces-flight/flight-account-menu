@@ -7,6 +7,8 @@ import { Context as ConfigContext } from '../../ConfigContext';
 import account from '../../modules/account';
 import auth from '../../modules/auth';
 
+import styles from '../../styles.module.css';
+
 function SignedIn({ currentUser, dispatch }) {
   const { signedInLinks } = useContext(ConfigContext);
 
@@ -23,15 +25,16 @@ function SignedIn({ currentUser, dispatch }) {
         aria-expanded="false"
         href="#"
       >
-        <span className="align-self-center mr-2" style={{lineHeight: '1'}}>
-          <span
-            className={
-              classNames(
-                "font-weight-bold user-name",
-                { 'user-name--null': currentUser.name == null },
-              )
-            }
-          >
+        <span
+          className={
+            classNames(
+              "align-self-center mr-2 user-block",
+              styles.userBlock,
+              { 'user-name--null': currentUser.name == null },
+            )
+          }
+        >
+          <span className="font-weight-bold user-name">
             { currentUser.name || <React.Fragment>&nbsp;</React.Fragment> }
           </span><br />
           <span className="d-inline-block float-right user-username">

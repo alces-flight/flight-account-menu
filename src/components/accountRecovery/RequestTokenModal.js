@@ -23,7 +23,6 @@ const RequestTokenModal = ({
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
       submitting={stage === 'SUBMITTING'}
-      style={{ minWidth: '52px' }}
       type="submit"
     >
       Recover

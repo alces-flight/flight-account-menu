@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -10,6 +11,8 @@ import registration from '../../modules/registration';
 import RegistrationForm from './Form';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
+
+import styles from '../../styles.module.css';
 
 const registrationStages = registration.constants.registrationStages;
 const modalIsDisplayed = (stage) => stage !== registrationStages.NOT_STARTED;
@@ -49,7 +52,7 @@ const RegistrationModal = ({
         Already have an account?{' '}
       </span>
       <button
-        className="btn btn-link p-0 pb-1"
+        className={classNames("btn btn-link", styles.inlineButton)}
         onClick={() => {cancelSignUp() ; showLoginForm();}}
         tabIndex={1}
       >

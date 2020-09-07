@@ -18,7 +18,7 @@ const ResetPasswordError = ({ errors, startAccountRecovery }) => {
         The password reset token has not been recognized.  Please make sure that
         it has been entered into the browser's address bar correctly, or{' '}
         <Button
-          className={styles.alignedButton}
+          className={styles.inlineButton}
           color="link"
           onClick={startAccountRecovery}
         >

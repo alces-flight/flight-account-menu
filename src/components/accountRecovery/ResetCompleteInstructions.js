@@ -14,7 +14,7 @@ const ResetCompleteInstructions = ({ showLoginForm }) => (
       Your password has been successfully reset. You may now{' '}
       <Button
         color="link"
-        className={styles.alignedButton}
+        className={styles.inlineButton}
         onClick={showLoginForm}
       >
         sign in

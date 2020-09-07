@@ -1,13 +1,20 @@
 import React from 'react'
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import auth from '../../modules/auth';
 
+import styles from '../../styles.module.css';
+
 function SignedOut({ currentUser, dispatch }) {
   return (
     <button
-      className="ml-3 btn btn-success mr-1 pl-3 pr-4 text-uppercase font-weight-bold"
-      style={{ marginTop: '12px' }}
+      className={
+        classNames(
+          "ml-3 btn btn-success mr-1 pl-3 pr-4 text-uppercase font-weight-bold",
+          styles.signedOutButton,
+        )
+      }
       type="submit"
       onClick={(evt) => {
         dispatch(auth.actions.showLoginForm());
