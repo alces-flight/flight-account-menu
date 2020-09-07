@@ -26,33 +26,34 @@ defaultErrorMap['must be accepted'] = defaultErrorMap['not_accepted'];
 function formattedErrors(error, completeErrorMap) {
   if (error == null) {
     return null;
-  } else if (Array.isArray(error)) {
-    return error.map(e => completeErrorMap[e] || e).join(', ');
+  } else if (Array.isArray(error.message)) {
+    return error.message.map(e => completeErrorMap[e] || e).join(', ');
   } else {
-    return completeErrorMap[error] || error;
+    return completeErrorMap[error.message] || error.message;
   }
 }
 
 const FormInput = ({
   check,
-  errorMap,
+  errorMap={},
   help,
   helpProps,
   hideLabel,
-  input,
   label,
-  meta: { error, touched }={},
+  formMeta,
+  formErrors,
   name,
   ...custom
-}) => {
+}, ref) => {
+  const touched = formMeta.touched[name] || formMeta.isSubmitted;
+  const error = formErrors[name];
   const inputEl = (
     <Input
       id={name}
       name={name}
       valid={touched ? !error : undefined}
-      {...input}
-      value={input.value == null ? "" : input.value}
       {...custom}
+      innerRef={ref}
     />
   );
 
@@ -79,10 +80,4 @@ const FormInput = ({
   );
 };
 
-FormInput.defaultProps = {
-  errorMap: {}
-};
-
-// FormInput.FormFeedback = FormFeedback;
-
-export default FormInput;
+export default React.forwardRef(FormInput);

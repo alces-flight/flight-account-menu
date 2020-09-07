@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 
 import accountRecovery from '../../modules/accountRecovery';
 
-import FormInput from '../FormInputNew';
+import FormInput from '../FormInput';
 import { resolver } from "../../utils/formValidationResolver";
 
 const RequestTokenForm = ({

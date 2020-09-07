@@ -8,7 +8,7 @@ import auth from '../../modules/auth';
 import account from '../../modules/account'; 
 
 import CollapsibleFormSection from '../CollapsibleFormSection';
-import FormInput from '../FormInputNew';
+import FormInput from '../FormInput';
 import { resolver, settingErrors } from "../../utils/formValidationResolver";
 
 const SettingsForm = ({
@@ -18,9 +18,7 @@ const SettingsForm = ({
 }, apiRef) => {
   const [changingPassword, setChangingPassword] = useState(initialValues.changingPassword);
 
-  const {
-    getValues, register, handleSubmit, errors, formState, setError, setValue,
-  } = useForm({
+  const { register, handleSubmit, errors, formState, setError } = useForm({
     defaultValues: initialValues,
     mode: 'all',
     resolver: resolver((data) => {

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 
 import auth from '../../modules/auth'; 
 
-import FormInput from '../FormInputNew';
+import FormInput from '../FormInput';
 import { resolver, settingErrors } from "../../utils/formValidationResolver";
 
 const ConfirmPasswordForm = ({

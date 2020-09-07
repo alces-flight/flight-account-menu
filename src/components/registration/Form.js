@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import account from '../../modules/account';
 import registration from '../../modules/registration'; 
 
-import FormInput from '../FormInputNew';
+import FormInput from '../FormInput';
 import TermsLabel from './TermsLabel';
 import { resolver } from "../../utils/formValidationResolver";
 
@@ -23,11 +23,11 @@ function RegistrationForm({
   registerAccount,
   unexpectedFailure,
 }, apiRef) {
-  const { register, handleSubmit, errors, formState, isSubmitting } = useForm({
+  const { register, handleSubmit, errors, formState } = useForm({
     mode: 'all',
     resolver: resolver(account.validations.registrationValidator),
   });
-  const { touched, isSubmitted } = formState;
+  const { touched, isSubmitted, isSubmitting } = formState;
 
   // API exported by this component to allow for programatic submitting.
   // This is so not the way React functional components are supposed to work,

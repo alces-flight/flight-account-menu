@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import accountRecovery from '../../modules/accountRecovery';
 import account from '../../modules/account';
 
-import FormInput from '../FormInputNew';
+import FormInput from '../FormInput';
 import { resolver } from "../../utils/formValidationResolver";
 
 const ResetPasswordForm = ({

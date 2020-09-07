@@ -6,15 +6,15 @@ import { useForm } from 'react-hook-form';
 import auth from '../../modules/auth';
 import registration from '../../modules/registration';
 
-import FormInput from '../FormInputNew';
+import FormInput from '../FormInput';
 import { resolver, settingErrors } from "../../utils/formValidationResolver";
 
 function Form({ login, }, apiRef) {
-  const { register, handleSubmit, errors, formState, isSubmitting, setError } = useForm({
+  const { register, handleSubmit, errors, formState, setError } = useForm({
     mode: 'all',
     resolver: resolver(auth.validations.signInValidator),
   });
-  const { touched, isSubmitted } = formState;
+  const { touched, isSubmitted, isSubmitting } = formState;
   const submit = handleSubmit(settingErrors(login, setError));
 
   // API exported by this component to allow for programatic submitting.

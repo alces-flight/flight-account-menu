@@ -5,8 +5,6 @@ import { createStructuredSelector } from 'reselect';
 import account from '../../modules/account';
 import auth from '../../modules/auth';
 
-import useForm from '../../useForm';
-
 import Form from './SettingsForm';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
@@ -19,7 +17,7 @@ const SettingsModal = ({
   updateAccount,
 }) => {
   const formApi = React.useRef(null); 
-  const submitButton =(
+  const submitButton = (
     <StatefulButton
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
