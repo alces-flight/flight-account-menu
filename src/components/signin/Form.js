@@ -57,7 +57,7 @@ function Form({ login, }, apiRef) {
   );
 }
 
-const enhance = compose(
+export const enhance = compose(
   connect(
     null,
     {

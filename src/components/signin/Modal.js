@@ -2,31 +2,32 @@ import React from 'react'
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { compose, withProps } from 'recompose';
 
 import accountRecovery from '../../modules/accountRecovery';
 import auth from '../../modules/auth';
 import registration from '../../modules/registration';
+import { Context as ConfigContext } from '../../ConfigContext';
 
-import SignInForm from './Form';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
 
 import styles from '../../styles.module.css';
 
-const modalIsDisplayed = (stage) => stage !== auth.constants.signOnStates.NOT_STARTED;
-
 function SignInModal({
   hideLoginForm,
-  signOnState,
+  isOpen,
+  isSubmitting,
   startAccountRecovery,
   startSignUp,
 }) {
   const formApi = React.useRef(null); 
+  const SignInForm = React.useContext(ConfigContext).components.SignInForm;
   const submitButton = (
     <StatefulButton
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
-      submitting={signOnState === auth.constants.signOnStates.SUBMITTING}
+      submitting={isSubmitting}
       type="submit"
     >
       Sign in
@@ -37,7 +38,7 @@ function SignInModal({
     <StandardModal
       buttons={submitButton}
       closeButtonText="Cancel"
-      isOpen={modalIsDisplayed(signOnState)}
+      isOpen={isOpen}
       title="Sign in to Flight"
       toggle={hideLoginForm}
     >
@@ -69,13 +70,25 @@ function SignInModal({
   );
 }
 
-export default connect(
-  createStructuredSelector({
-    signOnState: auth.selectors.signOnStateSelector
+export const enhance = compose(
+  connect(
+    createStructuredSelector({
+      signOnState: auth.selectors.signOnStateSelector
+    }),
+    {
+      hideLoginForm: auth.actions.hideLoginForm,
+      startSignUp: registration.actions.startSignUp,
+      startAccountRecovery: accountRecovery.actions.startAccountRecovery,
+    }
+  ),
+
+  withProps((props) => {
+    return {
+      isOpen: props.signOnState !== auth.constants.signOnStates.NOT_STARTED,
+      isSubmitting: props.signOnState === auth.constants.signOnStates.SUBMITTING,
+    }
   }),
-  {
-    hideLoginForm: auth.actions.hideLoginForm,
-    startSignUp: registration.actions.startSignUp,
-    startAccountRecovery: accountRecovery.actions.startAccountRecovery,
-  }
-)(SignInModal);
+
+);
+
+export default enhance(SignInModal);

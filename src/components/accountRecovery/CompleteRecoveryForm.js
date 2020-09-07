@@ -10,7 +10,7 @@ import account from '../../modules/account';
 import FormInput from '../FormInput';
 import { resolver } from "../../utils/formValidationResolver";
 
-const ResetPasswordForm = ({
+const CompleteRecoveryForm = ({
   resetPassword,
   stage,
   token,
@@ -79,4 +79,4 @@ const enhance = compose(
   React.forwardRef,
 );
 
-export default enhance(ResetPasswordForm);
+export default enhance(CompleteRecoveryForm);

@@ -7,7 +7,7 @@ import UnexpectedErrorMessage from './UnexpectedErrorMessage';
 
 import styles from '../../styles.module.css';
 
-const ResetPasswordError = ({ errors, startAccountRecovery }) => {
+const CompleteRecoveryError = ({ errors, startAccountRecovery }) => {
   if (errors == null) {
     return <UnexpectedErrorMessage />;
   }
@@ -48,11 +48,11 @@ const enhance = compose(
     null,
     (dispatch) => ({
       startAccountRecovery: () => {
-        dispatch(accountRecovery.actions.hideResetPasswordModal());
+        dispatch(accountRecovery.actions.hideCompleteRecoveryModal());
         dispatch(accountRecovery.actions.startAccountRecovery());
       },
     }),
   ),
 );
 
-export default enhance(ResetPasswordError);
+export default enhance(CompleteRecoveryError);

@@ -41,7 +41,7 @@ const SettingsModal = ({
   );
 }
 
-export default connect(
+export const enhance = connect(
   createStructuredSelector({
     isOpen: account.selectors.isSettingsModalShowing,
     submission: account.selectors.retrieval,
@@ -49,4 +49,6 @@ export default connect(
   {
     closeModal: account.actions.hideSettingsModal,
   }
-)(SettingsModal);
+);
+
+export default enhance(SettingsModal);

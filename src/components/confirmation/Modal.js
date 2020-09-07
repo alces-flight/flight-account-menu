@@ -1,5 +1,5 @@
 import React from 'react';
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, withProps } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -8,7 +8,6 @@ import confirmation from '../../modules/confirmation';
 import StandardModal from '../StandardModal';
 
 const { confirmationStages } = confirmation.constants;
-const modalShowing = (stage) => stage !== confirmationStages.NOT_STARTED;
 const closeButtonShowing = (stage) => (
   stage === confirmationStages.SUCCEEDED || stage === confirmationStages.FAILED
 );
@@ -64,11 +63,12 @@ const Success = ({ confirmedEmailChange }) => (
 function ConfirmationModal({
   closeDialog,
   confirmationState: { stage, error, confirmedEmailChange },
+  isOpen,
 }) {
 
   return (
     <StandardModal
-      isOpen={modalShowing(stage)}
+      isOpen={isOpen}
       title="Confirming your Alces Flight Platform account"
       toggle={closeDialog}
     >
@@ -82,7 +82,7 @@ function ConfirmationModal({
   );
 }
 
-const enhance = compose(
+export const enhance = compose(
   connect(
     createStructuredSelector({
       confirmationState: confirmation.selectors.confirmationState,
@@ -100,6 +100,12 @@ const enhance = compose(
       if (token && stage === confirmationStages.NOT_STARTED) {
         submitConfirmation(token);
       }
+    }
+  }),
+
+  withProps((props) => {
+    return {
+      isOpen: props.confirmationState.stage !== confirmationStages.NOT_STARTED,
     }
   }),
 );

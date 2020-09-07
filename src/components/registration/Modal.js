@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, withProps } from 'recompose';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -14,15 +14,11 @@ import StatefulButton from '../StatefulButton';
 
 import styles from '../../styles.module.css';
 
-const registrationStages = registration.constants.registrationStages;
-const modalIsDisplayed = (stage) => stage !== registrationStages.NOT_STARTED;
-const isSubmitting = (stage) => stage === registrationStages.SUBMITTING;
-
 const RegistrationModal = ({
   cancelSignUp,
-  registrationStage,
+  isOpen,
+  isSubmitting,
   showLoginForm,
-  ...props
 }) => {
   const formApi = React.useRef(null);
 
@@ -30,7 +26,7 @@ const RegistrationModal = ({
     <StatefulButton
       className="btn btn-primary"
       onClick={() => formApi.current.submit() }
-      submitting={isSubmitting(registrationStage)}
+      submitting={isSubmitting}
       submittingText="Signing up..."
       type="submit"
     >
@@ -42,7 +38,7 @@ const RegistrationModal = ({
     <StandardModal
       buttons={submitButton}
       closeButtonText="Cancel"
-      isOpen={modalIsDisplayed(registrationStage)}
+      isOpen={isOpen}
       title="Sign up to the Alces Flight Platform"
       toggle={cancelSignUp}
     >
@@ -62,7 +58,7 @@ const RegistrationModal = ({
   );
 };
 
-const enhance = compose(
+export const enhance = compose(
   connect(
     createStructuredSelector({
       emailFromUrl: registration.selectors.signupEmailFromUrl,
@@ -81,6 +77,14 @@ const enhance = compose(
         this.props.startSignUp();
       }
     },
+  }),
+
+  withProps((props) => {
+    const stages = registration.constants.registrationStages;
+    return {
+      isOpen: props.registrationStage !== stages.NOT_STARTED,
+      isSubmitting: props.registrationStage === stages.SUBMITTING,
+    }
   }),
 );
 

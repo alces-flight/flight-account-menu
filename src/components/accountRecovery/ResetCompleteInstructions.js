@@ -28,7 +28,7 @@ const enhance = compose(
     null,
     (dispatch) => ({
       showLoginForm: () => {
-        dispatch(accountRecovery.actions.hideResetPasswordModal());
+        dispatch(accountRecovery.actions.hideCompleteRecoveryModal());
         dispatch(auth.actions.showLoginForm());
       },
     }),

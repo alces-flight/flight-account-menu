@@ -63,7 +63,7 @@ const ConfirmPasswordModal = ({
   );
 };
 
-export default connect(
+export const enhance = connect(
   createStructuredSelector({
     isOpen: auth.selectors.confirmPassword.isModalOpen,
     retrieval: auth.selectors.confirmPassword.retrieval,
@@ -78,4 +78,6 @@ export default connect(
   {
     toggle: () => auth.actions.hideConfirmPasswordForm({ manuallyDismissed: true }),
   }
-)(ConfirmPasswordModal);
+);
+
+export default enhance(ConfirmPasswordModal);

@@ -8,11 +8,11 @@ import accountRecovery from '../../modules/accountRecovery';
 import StandardModal from '../StandardModal';
 import StatefulButton from '../StatefulButton';
 
-import Form from './ResetPasswordForm';
+import Form from './CompleteRecoveryForm';
 import ResetCompleteInstructions from './ResetCompleteInstructions';
-import ResetPasswordError from './ResetPasswordError';
+import CompleteRecoveryError from './CompleteRecoveryError';
 
-const ResetPasswordModal = ({
+const CompleteRecoveryModal = ({
   closeModal,
   isOpen,
   stage,
@@ -41,14 +41,13 @@ const ResetPasswordModal = ({
       toggle={closeModal}
     >
       { stage === 'RESOLVED' ? <ResetCompleteInstructions /> : null }
-      { stage === 'REJECTED' ? <ResetPasswordError /> : null }
+      { stage === 'REJECTED' ? <CompleteRecoveryError /> : null }
       { stage === 'INITIATED' || stage === 'SUBMITTING' ? <Form token={token} ref={formApi} /> : null }
     </StandardModal>
   );
 }
 
-const enhance = compose(
-
+export const enhance = compose(
   connect(
     createStructuredSelector({
       isOpen: accountRecovery.selectors.resetPassword.isModalOpen,
@@ -56,8 +55,8 @@ const enhance = compose(
       token: accountRecovery.selectors.tokenFromUrl,
     }),
     {
-      closeModal: accountRecovery.actions.hideResetPasswordModal,
-      showModal: accountRecovery.actions.showResetPasswordModal,
+      closeModal: accountRecovery.actions.hideCompleteRecoveryModal,
+      showModal: accountRecovery.actions.showCompleteRecoveryModal,
     }
   ),
 
@@ -70,4 +69,4 @@ const enhance = compose(
   }),
 );
 
-export default enhance(ResetPasswordModal);
+export default enhance(CompleteRecoveryModal);

@@ -29,7 +29,7 @@ const WelcomeMessageModal = ({
   </StandardModal>
 );
 
-const enhance = compose(
+export const enhance = compose(
   connect(
     createStructuredSelector({
       isOpen: registration.selectors.isWelcomeMessageModalShowing,

@@ -10,11 +10,11 @@ export const hideRequestTokenModal = () => ({
   type: actionTypes.REQUEST_TOKEN_MODAL_HIDDEN,
 });
 
-export const hideResetPasswordModal = () => ({
+export const hideCompleteRecoveryModal = () => ({
   type: actionTypes.RESET_PASSWORD_MODAL_HIDDEN,
 });
 
-export const showResetPasswordModal = () => ({
+export const showCompleteRecoveryModal = () => ({
   type: actionTypes.RESET_PASSWORD_MODAL_SHOWN,
 });
 

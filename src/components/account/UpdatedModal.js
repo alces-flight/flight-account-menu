@@ -37,7 +37,7 @@ UpdatedModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 };
 
-export default connect(
+export const enhance = connect(
   createStructuredSelector({
     isOpen: account.selectors.isConfirmationModalShowing,
     wasEmailUpdated: account.selectors.wasEmailUpdated,
@@ -45,4 +45,6 @@ export default connect(
   {
     closeModal: account.actions.hideConfirmationModal,
   }
-)(UpdatedModal);
+);
+
+export default enhance(UpdatedModal);

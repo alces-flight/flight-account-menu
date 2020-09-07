@@ -12,7 +12,7 @@ import Form from './RequestTokenForm';
 import TokenSentInstructions from './RequestTokenSentInstructions';
 import UnexpectedErrorMessage from './UnexpectedErrorMessage';
 
-const RequestTokenModal = ({
+const StartRecoveryModal = ({
   closeModal,
   isOpen,
   stage,
@@ -46,7 +46,7 @@ const RequestTokenModal = ({
   );
 }
 
-const enhance = compose(
+export const enhance = compose(
   connect(
     createStructuredSelector({
       isOpen: accountRecovery.selectors.requestToken.isModalOpen,
@@ -58,4 +58,4 @@ const enhance = compose(
   ),
 );
 
-export default enhance(RequestTokenModal);
+export default enhance(StartRecoveryModal);
