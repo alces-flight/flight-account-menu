@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import jsGravatar from 'js-gravatar';
 
+import { Context as ConfigContext } from '../../ConfigContext';
 import account from '../../modules/account';
 import auth from '../../modules/auth';
 
-function SignedIn({ currentUser, dispatch, signedInLinks }) {
+function SignedIn({ currentUser, dispatch }) {
+  const { signedInLinks } = useContext(ConfigContext);
+
   const avatarUrl = currentUser.avatarUrl ?
     currentUser.avatarUrl :
     jsGravatar({ email: currentUser.email, size: 48, defaultImage: 'identicon' });

@@ -16,7 +16,7 @@ import SignedOut from './Menu/SignedOut';
 import StartRecoveryModal from './accountRecovery/RequestTokenModal';
 import WelcomeMessageModal from './registration/WelcomeMessageModal';
 
-function Menu({ currentUser, signedInLinks }) {
+function Menu({ currentUser }) {
   if (currentUser) {
     return (
       <React.Fragment>
@@ -25,10 +25,7 @@ function Menu({ currentUser, signedInLinks }) {
         <AccountSettingsModal />
         <ConfirmPasswordModal />
 
-        <SignedIn
-          currentUser={currentUser}
-          signedInLinks={signedInLinks}
-        />
+        <SignedIn currentUser={currentUser} />
       </React.Fragment>
     );
   }

@@ -6,6 +6,7 @@ import { applyMiddleware, createStore, compose } from 'redux';
 
 import createLogics from './logics';
 import createReducer from './reducer';
+import { Provider as ConfigProvider } from './ConfigContext';
 
 import apiRequest from './modules/apiRequest';
 import Menu from './components/Menu';
@@ -28,10 +29,22 @@ export const store = createStore(
 
 createLogics(store);
 
-export const AccountMenu = ({ signedInLinks }) => {
+export const AccountMenu = ({
+  privacyPolicyUrl,
+  signedInLinks,
+  termsUrl,
+}) => {
   return (
     <Provider store={store}>
-      <Menu signedInLinks={signedInLinks} />
+      <ConfigProvider
+        value={{
+          privacyPolicyUrl: privacyPolicyUrl || "https://alces-flight.com/privacy",
+          signedInLinks: signedInLinks || [],
+          termsUrl: termsUrl || "https://alces-flight.com/terms",
+        }}
+      >
+        <Menu />
+      </ConfigProvider>
     </Provider>
   );
 }

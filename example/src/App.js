@@ -12,6 +12,8 @@ const App = () => {
           text: "Flight Center",
         }
       ]}
+      privacyPolicyUrl="https://next.alces-flight.com/privacy"
+      termsUrl="https://next.alces-flight.com/terms"
     />
   );
 }
