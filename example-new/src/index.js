@@ -1,5 +1,2 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-
-ReactDOM.render(<App />, document.getElementById('flight-account-menu'))
+import 'flight-account-menu/dist/index.css';
+export * from 'flight-account-menu';
