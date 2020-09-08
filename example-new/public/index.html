@@ -1,0 +1,542 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=0.8,shrink-to-fit=yes">
+    <title>Alces Flight - Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheet.css">
+    <link rel="stylesheet" href="/theme.css">
+    <link rel="stylesheet" href="/fixes.css">
+    <!-- you don't need to keep this, but it's cool for stats! -->
+    <meta name="generator" content="Nanoc 4.11.18">
+
+    <script>
+      window.__SSO_BASE_URL__ = 'http://accounts.alces-flight.lvh.me:4000';
+      window.__SSO_COOKIE_NAME__ = 'flight_sso_dev';
+      window.__FLIGHT_APP_URL__ = 'http://menu.alces-flight.lvh.me:3000';
+    </script>
+
+  </head>
+  <body>
+    <div id="nav">
+      <nav class="d-flex d-lg-none navbar navbar-dark justify-content-start" role="navigation">
+        <a class="navbar-brand" href="/">
+          <img src="/assets/image/logo.png" alt="Alces Flight" />
+        </a>
+        <div class="dropdown">
+          <a class="nav nav-link dropdown-toggle d-inline-flex"
+             id="nav-menu"
+             data-toggle="dropdown"
+             aria-haspopup="true"
+             aria-expanded="false"
+             href="#"
+             >
+            <span class="navbar-toggler-icon"></span>
+          </a>
+          <div class="dropdown-menu text-uppercase" aria-labelledby="nav-menu">
+            <a href="/#hpc-solutions" class="nav nav-link dropdown-item" type="button">HPC Solutions</a>
+            <a href="/#cloud-hpc" class="nav nav-link dropdown-item" type="button">Cloud HPC</a>
+
+            <a href="/hardware" class="nav nav-link dropdown-item" type="button">HPC Hardware</a>
+            <a href="/integration" class="nav nav-link dropdown-item" type="button">Integration Services</a>
+            <a href="/flight-center" class="nav nav-link dropdown-item" type="button">Flight Center</a>
+            <a href="/info" class="nav nav-link dropdown-item" type="button">Further Information</a>
+            <a href="/latest" class="nav nav-link dropdown-item" type="button">Latest News</a>
+            <a href="https://medium.com/@alcesflight" class="nav nav-link dropdown-item" type="button">Blog</a>
+
+            <a href="/#contact" class="nav nav-link dropdown-item" type="button">Contact us</a>
+          </div>
+        </div>
+        <!-- XXX here too -->
+        <div class="ml-auto dropdown">
+          <a class="nav nav-link dropdown-toggle d-inline-flex"
+             id="account-menu-sm"
+             data-toggle="dropdown"
+             aria-haspopup="true"
+             aria-expanded="false"
+             href="#"
+             >
+            <span class="align-self-center">
+              <img
+                src="https://www.gravatar.com/avatar/7770b29ff71d737879dc6dc4b67af77c?s=48"
+                />
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right text-uppercase" aria-labelledby="account-menu-sm">
+            <a href="https://center.alces-flight.com" class="nav nav-link dropdown-item" type="button">Flight Center</a>
+            <a href="#" class="nav nav-link dropdown-item" type="button">My account</a>
+            <a href="#" class="nav nav-link dropdown-item" type="button">Log out</a>
+          </div>
+        </div>
+      </nav>
+      <nav class="d-none d-lg-block navbar fixed-top navbar-dark" role="navigation">
+        <div class="w-100 d-flex">
+          <a class="mr-auto navbar-brand" href="/">
+            <img src="/assets/image/logo.png" alt="Alces Flight" />
+          </a>
+          <div class="d-none d-lg-flex justify-content-end">
+            <a class="nav-separator px-4 nav nav-link align-self-center text-uppercase" href="/#hpc-solutions">
+              HPC Solutions
+            </a>
+            <a class="nav-separator px-4 nav nav-link align-self-center text-uppercase" href="/#cloud-hpc">
+              Cloud HPC
+            </a>
+            <a class="nav-separator px-4 nav nav-link align-self-center text-uppercase" href="/#contact">
+              Contact us
+            </a>
+            <div class="dropdown align-self-center">
+              <a class="nav-separator px-4 nav nav-link dropdown-toggle d-inline-flex text-uppercase"
+                 id="nav-menu-more"
+                 data-toggle="dropdown"
+                 aria-haspopup="true"
+                 aria-expanded="false"
+                 href="#"
+                 >
+                More
+              </a>
+              <div class="dropdown-menu text-uppercase" aria-labelledby="nav-menu-more">
+                <a href="/hardware" class="nav nav-link dropdown-item" type="button">HPC Hardware</a>
+                <a href="/integration" class="nav nav-link dropdown-item" type="button">Integration Services</a>
+                <a href="/flight-center" class="nav nav-link dropdown-item" type="button">Flight Center</a>
+                <a href="/info" class="nav nav-link dropdown-item" type="button">Further Information</a>
+                <a href="/latest" class="nav nav-link dropdown-item" type="button">Latest News</a>
+                <a href="https://medium.com/@alcesflight" class="nav nav-link dropdown-item" type="button">Blog</a>
+              </div>
+            </div>
+            <div id="flight-account-menu" />
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div id="main">
+      <section id="trailer-section" class="d-none d-md-block">
+  <div id="trailer-container">
+    <video autoplay muted loop id="trailer">
+      <source src="/assets/video/Flight.mp4" type="video/mp4">
+    </video>
+  </div>
+</section>
+<section id="trailer-static" class="d-block d-md-none section-grey">
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex-column">
+        <div class="text-center mb-4">
+             <img class="w-50" src="/assets/image/FadedMooseBird.png" />
+        </div>
+        <h1 class="mb-3">
+          <i style="color: rgb(34,85,132)" class="fa fa-circle bullet"></i>
+          Build.
+        </h1>
+        <h1 class="mb-3">
+          <i style="color: rgb(132,142,89)" class="fa fa-circle bullet"></i>
+          Transform.
+        </h1>
+        <h1>
+          <i style="color: rgb(124,37,103)" class="fa fa-circle bullet"></i>
+          Grow.
+        </h1>
+        <h2 class="mt-5">
+          At Alces Flight we build and transform HPC clusters for as
+          little as &pound;50/day.
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a id="about"></a>
+<section class="section-blue section-atomic">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-6 d-flex align-content-center flex-wrap">
+        <div>
+        <h1>About us</h1>
+        <p>
+          Alces Flight builds and transforms HPC clusters into cloud
+          and cloud-enabled HPC solutions.
+        </p>
+        <p>
+          From on-premises sites looking to grow, to new ideas wanting
+          a place to start, Alces Flight uses a suite of products and
+          services designed to get your team up and running for as
+          little as &pound;50/day.
+        </p>
+        </div>
+      </div>
+      <div class="col-8 offset-2 offset-lg-0 col-lg-6 align-content-center flex-wrap d-flex">
+        <img class="rounded-lg border border-light" src="/assets/image/team.jpg" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="anchor" id="hpc-solutions"></a>
+<section class="section-black section-right">
+  <div class="container-fluid">
+    <div class="leader row">
+      <div class="d-none d-lg-flex col-lg-6 col-xl-7 align-content-center flex-wrap">
+        <img src="/assets/image/Solutions_Leader.png" />
+      </div>
+      <div class="col d-flex align-content-center flex-wrap">
+        <div>
+          <h1>HPC Solutions</h1>
+          <p class="subtitle">
+            Build, Transform and Grow your HPC Cluster with Alces Flight.
+          </p>
+          <p>
+            <em>
+              Get started from &pound;50/day.
+            </em>
+            <span class="bullets ml-0 ml-sm-4">
+              <i style="color: rgb(34,85,132)" class="fa fa-circle bullet"></i>
+              <i style="color: rgb(132,142,89)" class="fa fa-circle bullet"></i>
+              <i style="color: rgb(124,37,103)" class="fa fa-circle bullet"></i>
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-bblue">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-7 d-flex align-content-center flex-wrap">
+        <div>
+          <h2>
+            <i style="color: rgb(34,85,132)" class="fa fa-circle bullet"></i>
+            Build.
+          </h2>
+          <p>
+            The team at Alces Flight has been building HPC clusters for
+            over ten years and was one of the first companies to
+            integrate cloud into their architecture.
+          </p>
+        </div>
+      </div>
+      <div class="col d-none d-lg-flex align-content-center flex-wrap justify-content-center">
+        <img class="w-75" src="/assets/image/Solutions_Build.png" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-none d-lg-flex align-content-center flex-wrap justify-content-center">
+        <img class="w-75" src="/assets/image/Solutions_Transform.png" />
+      </div>
+      <div class="col-12 col-lg-7 d-flex align-content-center flex-wrap">
+        <div>
+          <h2>
+            <i style="color: rgb(132,142,89)" class="fa fa-circle bullet"></i>
+            Transform.
+          </h2>
+          <p>
+            Let Alces Flight transform your cluster into a cloud or
+            cloud-enabled solution ready to bring agility to your HPC
+            workloads.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-7 d-flex align-content-center flex-wrap">
+        <div>
+          <h2>
+            <i style="color: rgb(124,37,103)" class="fa fa-circle bullet"></i>
+            Grow.
+          </h2>
+          <p>
+            The team at Alces Flight can transform new and existing HPC
+            clusters into growth-focused solutions. Gain agility, work
+            across platform, and target your efforts on continuous
+            solution improvement.
+          </p>
+        </div>
+      </div>
+      <div class="col d-none d-lg-flex align-content-center flex-wrap justify-content-center">
+        <img class="w-75" src="/assets/image/Solutions_Grow.png" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="anchor" id="cloud-hpc"></a>
+<section class="section-black section-left">
+  <div class="container-fluid">
+    <div class="leader row">
+      <div class="col d-flex align-content-center flex-wrap">
+        <div>
+          <h1>Cloud HPC</h1>
+          <p class="subtitle">
+            Build, Manage and Grow your HPC Cluster in the cloud with Alces Flight.
+          </p>
+          <p>
+            <em>
+              Starting from &pound;50/day.
+            </em>
+            <span class="bullets ml-2 ml-sm-4">
+              <i style="color: rgb(34,85,132)" class="fa fa-circle bullet"></i>
+              <i style="color: rgb(50,136,188)" class="fa fa-circle bullet"></i>
+              <i style="color: rgb(124,37,103)" class="fa fa-circle bullet"></i>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="d-none d-lg-flex col-lg-6 col-xl-7 align-content-center flex-wrap">
+        <img src="/assets/image/Cloud_Leader.png" />
+      </div>
+    </div>
+  </div>
+</div>
+<section class="section-purple">
+  <div class="container">
+    <div class="row">
+      <div class="col d-none d-lg-flex align-content-center flex-wrap justify-content-center">
+        <img class="w-75" src="/assets/image/Cloud_Build.png" />
+      </div>
+      <div class="col-12 col-lg-7 d-flex align-content-center flex-wrap">
+        <div>
+          <h2>
+            <i style="color: rgb(34,85,132)" class="fa fa-circle bullet"></i>
+            Build.
+          </h2>
+          <p>
+            Alces Flight has been building HPC clusters in the cloud
+            since 2016. From AWS, Azure, and Google to OpenStack and
+            private cloud. We know how to make your cloud cluster build
+            happen.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-7 d-flex align-content-center flex-wrap">
+        <div>
+          <h2>
+            <i style="color: rgb(50,136,188)" class="fa fa-circle bullet"></i>
+            Manage.
+          </h2>
+          <p>
+            Don’t let HPC cloud run away with your budget. Let Alces
+            Flight keep your projects in check and your cloud clusters
+            at the ready for right-on-time usage.
+          </p>
+        </div>
+      </div>
+      <div class="col d-none d-lg-flex align-content-center flex-wrap justify-content-center">
+        <img class="w-75" src="/assets/image/Cloud_Manage.png" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col d-none d-lg-flex align-content-center flex-wrap justify-content-center">
+        <img class="w-75" src="/assets/image/Cloud_Grow.png" />
+      </div>
+      <div class="col-12 col-lg-7 d-flex align-content-center flex-wrap">
+        <div>
+          <h2>
+            <i style="color: rgb(124,37,103)" class="fa fa-circle bullet"></i>
+            Grow.
+          </h2>
+          <p>
+            The team at Alces Flight have been transforming HPC clusters
+            into solutions for over four years. Adding or moving to
+            cloud allows you the freedom to be agile, to focus efforts,
+            and move across platforms. We can show you how.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="anchor" id="contact"></a>
+<section class="section-green section-atomic">
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex align-content-center flex-wrap">
+        <div>
+          <h1>Contact us</h1>
+          <h2>
+            Join our email list
+          </h2>
+          <p>
+            Get the latest news, updates, and events from the Alces Flight crew. No third party emails, promise.
+          </p>
+          <div class="row">
+            <div class="col-10 offset-1">
+              <form>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Enter your email address" aria-label="Enter your email address" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="button-addon2">Subscribe</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <h2>
+            Visit our open-source projects
+          </h2>
+          <p>
+            We believe in giving back to the HPC community. Our latest projects can be viewed at the <a href="https://openflighthpc.org">OpenFlightHPC site</a> and over on <a href="https://github.com/openflighthpc">GitHub</a>.
+          </p>
+          <h2>
+            Have more you want to say?
+          </h2>
+          <p>
+            Our email is <a href="mailto:info@alces-flight.com">info@alces-flight.com</a>.
+          </p>
+          <p>
+            Alces Flight customer? <a href="#">Sign in to your account</a>.
+          </p>
+        </div>
+      </div>
+      <div class="col d-none d-lg-flex align-content-center flex-wrap">
+        <img class="rounded-lg border border-light" src="/assets/image/appliance.jpg" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-grey section-atomic">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-6 d-flex align-content-start flex-wrap">
+        <iframe
+          class="map"
+          height="500"
+          src="https://maps.google.com/maps?hl=en&ie=utf8&output=embed&sensor=true&iwd=1&mrt=loc&t=m&q=4%20Murdock%20Road%2C%20Bicester%2C%20UK%2C%20OX26%204PP&z=14&iwloc=addr"
+          >
+          </iframe>
+      </div>
+      <div class="col-12 col-lg-6 d-flex align-content-center flex-wrap">
+        <div>
+          <h1 class="mt-5 mt-lg-0">Company details</h1>
+          <h2>
+            Registered Address
+          </h2>
+          <p>
+            Alces Flight Ltd<br />
+            4 Murdock Road<br />
+            Bicester<br />
+            Oxfordshire<br />
+            OX26 4PP<br />
+          </p>
+          <h2>
+            VAT registration
+          </h2>
+          <p>
+            GB 239 9335 69
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-blue section-contact">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <p>
+          <a href="/#contact">
+            Contact us now to discuss your requirements.
+          </a>
+        </p>
+        <p>
+          <i class="fa fa-envelope"></i>
+          <a href="mailto:info@alces-flight.com">
+            info@alces-flight.com
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </div>
+    <footer>
+      <section class="section-black">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-sm-7 col-md-8 col-lg-9">
+              <img src="/assets/image/logo-square.png" alt="Alces Flight" /><br />
+              Alces Flight Limited, 10095215.<br />
+              Registered in England &amp; Wales.<br />
+              <br />
+            </div>
+            <div class="col-6 col-sm-5 col-md-4 col-lg-3">
+              <p>
+                <i class="fa fa-fw fa-twitter"></i><a href="https://twitter.com/alcesflight">Follow us</a>
+              </p>
+              <p>
+                <i class="fa fa-fw fa-envelope"></i><a href="mailto:info@alces-flight.com">Contact us</a>
+              </p>
+              <p>
+                <i class="fa fa-fw fa-star"></i><a href="/jobs">Work for us</a>
+              </p>
+            </div>
+          </div>
+          <div id="footer-nav">
+            <div class="row d-none d-sm-block">
+              <div class="col">
+                <nav class="navbar navbar-dark" role="navigation">
+                  <div class="w-100 d-flex justify-content-center">
+                    <span class="copyright">&copy; 2020 Alces Flight Ltd</span>
+                    <a class="nav navlink" href="/privacy">Privacy policy</a>
+                    <a class="nav navlink" href="/terms">Terms of service</a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="row d-sm-none">
+              <div class="col">
+                <nav class="navbar navbar-dark" role="navigation">
+                  <div class="w-100 d-flex justify-content-center">
+                    <a class="nav navlink nav-separator" href="/privacy">Privacy policy</a>
+                    <a class="nav navlink" href="/terms">Terms of service</a>
+                  </div>
+                </nav>
+              </div>
+            </div>
+            <div class="row d-sm-none">
+              <div class="col text-center">
+                <span class="copyright">&copy; 2020 Alces Flight Ltd</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <div id="cookie-widget" data-toggle="modal" data-target="#cookie-modal">
+      Privacy & Cookies Policy
+    </div>
+    <div id="cookie-modal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Privacy & Cookies Policy</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Cookies help us deliver our services. By using our services, you agree to our use of cookies.</p>
+            <p>You can read our <a href="/privacy">privacy policy</a> for more information about how we use cookies.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Agree</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a id="top-return" href="#" class="btn btn-success btn-lg top-return" role="button" title="Back to the top" data-toggle="tooltip" data-placement="right">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+
+    <!--script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- <script src="/assets/js/app.js"></script> -->
+  </body>
+</html>
