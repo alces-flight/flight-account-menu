@@ -7,6 +7,7 @@
   "repository": " openflighthpc/flight-account-menu",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
+  "umd": "dist/index.umd.js",
   "source": "src/index.js",
   "engines": {
     "node": ">=10"
@@ -15,7 +16,7 @@
     "build": "microbundle-crl --no-compress --format modern,cjs,umd",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
     "ouch": "microbundle-crl --no-compress --format umd --external React,react-is,react-dom,seamless-immutable,redux-axios-middleware --globals react=React",
-    "pouch": "microbundle-crl --no-compress --format modern --external react,react-is,react-dom,seamless-immutable,redux-axios-middleware --globals react=React",
+    "pouch": "microbundle-crl --no-compress --format modern --external none --globals react=React",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
@@ -30,6 +31,10 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-babel": "^5.2.0",
+    "@rollup/plugin-commonjs": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-replace": "^2.3.3",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
@@ -48,7 +53,10 @@
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-postcss": "^3.1.8"
   },
   "files": [
     "dist"
