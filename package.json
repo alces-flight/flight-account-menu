@@ -63,6 +63,7 @@
     "recompose": "^0.30.0",
     "redux": "^4.0.5",
     "redux-axios-middleware": "^4.0.1",
+    "redux-cookie": "^0.5.9",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "seamless-immutable": "^7.1.4",

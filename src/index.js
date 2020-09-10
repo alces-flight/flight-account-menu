@@ -3,6 +3,7 @@ import React from 'react'
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore, compose } from 'redux';
+import { createCookieMiddleware } from 'redux-cookie';
 
 import createLogics from './logics';
 import createReducer from './reducer';
@@ -48,6 +49,7 @@ export const store = createStore(
   composeEnhancers(
     applyMiddleware(
       apiRequest.middleware,
+      createCookieMiddleware(cookies),
       thunk,
     )
   )

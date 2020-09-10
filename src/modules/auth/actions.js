@@ -1,7 +1,10 @@
+import { removeCookie } from 'redux-cookie';
+
 import apiRequest from '../../modules/apiRequest';
+import constants from "../constants";
 
 import * as actionTypes from './actionTypes';
-import constants from "../constants";
+import { FLIGHT_SSO_COOKIE } from "./constants";
 
 export const setSSOToken = (token) => ({
   type: actionTypes.SET_SSO_TOKEN,
@@ -17,6 +20,12 @@ export const clearSSOToken = () => ({
 export const logout = () => dispatch => {
   dispatch({ type: actionTypes.LOGOUT });
   dispatch(clearSSOToken());
+  if (typeof window !== 'undefined') {
+    dispatch(removeCookie(FLIGHT_SSO_COOKIE, { domain: window.location.hostname.substring(window.location.hostname.indexOf('alces')) }));
+  }
+  else {
+    dispatch(removeCookie(FLIGHT_SSO_COOKIE));
+  }
 };
 
 export const showConfirmPasswordForm = ({ manuallyShown } = {}) => ({
