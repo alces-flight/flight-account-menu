@@ -8,7 +8,14 @@ import createLogics from './logics';
 import createReducer from './reducer';
 import { Provider as ConfigProvider } from './ConfigContext';
 
+import account from './modules/account';
+import accountRecovery from './modules/accountRecovery';
 import apiRequest from './modules/apiRequest';
+import auth from './modules/auth';
+import confirmation from './modules/confirmation';
+import jsonApi from './modules/jsonApi';
+import loadingStates from './modules/loadingStates';
+import registration from './modules/registration';
 import Menu from './components/Menu';
 
 import AccountSettingsModal,
@@ -92,3 +99,14 @@ export const AccountMenu = ({
     </Provider>
   );
 }
+
+export {
+  account,
+  accountRecovery,
+  apiRequest,
+  auth,
+  confirmation,
+  jsonApi,
+  loadingStates,
+  registration,
+};
