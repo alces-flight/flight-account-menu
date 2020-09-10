@@ -12,10 +12,8 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs,umd",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs",
-    "ouch": "microbundle-crl --no-compress --format umd --external React,react-is,react-dom,seamless-immutable,redux-axios-middleware --globals react=React",
-    "pouch": "microbundle-crl --no-compress --format modern --external react,react-is,react-dom,seamless-immutable,redux-axios-middleware --globals react=React",
+    "build": "microbundle-crl --no-compress --format modern,cjs",
+    "start": "microbundle-crl watch --no-compress --format modern",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
@@ -70,8 +68,5 @@
     "seamless-immutable": "^7.1.4",
     "universal-cookie": "^4.0.3",
     "validator": "^13.1.1"
-  },
-  "resolutions": {
-    "@rollup/plugin-commonjs": "11.0.2"
   }
 }
