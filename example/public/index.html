@@ -48,27 +48,7 @@
             <a href="/#contact" class="nav nav-link dropdown-item" type="button">Contact us</a>
           </div>
         </div>
-        <!-- XXX here too -->
-        <div class="ml-auto dropdown">
-          <a class="nav nav-link dropdown-toggle d-inline-flex"
-             id="account-menu-sm"
-             data-toggle="dropdown"
-             aria-haspopup="true"
-             aria-expanded="false"
-             href="#"
-             >
-            <span class="align-self-center">
-              <img
-                src="https://www.gravatar.com/avatar/7770b29ff71d737879dc6dc4b67af77c?s=48"
-                />
-            </span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right text-uppercase" aria-labelledby="account-menu-sm">
-            <a href="https://center.alces-flight.com" class="nav nav-link dropdown-item" type="button">Flight Center</a>
-            <a href="#" class="nav nav-link dropdown-item" type="button">My account</a>
-            <a href="#" class="nav nav-link dropdown-item" type="button">Log out</a>
-          </div>
-        </div>
+        <div id="flight-account-menu-sm"></div>
       </nav>
       <nav class="d-none d-lg-block navbar fixed-top navbar-dark" role="navigation">
         <div class="w-100 d-flex">
@@ -104,11 +84,12 @@
                 <a href="https://medium.com/@alcesflight" class="nav nav-link dropdown-item" type="button">Blog</a>
               </div>
             </div>
-            <div id="flight-account-menu" />
+            <div id="flight-account-menu"></div>
           </div>
         </div>
       </nav>
     </div>
+    <div id="flight-account-modal-container"></div>
     <div id="main">
       <section id="trailer-section" class="d-none d-md-block">
   <div id="trailer-container">
