@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/stylesheet.css">
     <link rel="stylesheet" href="/theme.css">
     <link rel="stylesheet" href="/fixes.css">
-    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.2.0/FlightAccountMenu.css">
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.3.0/FlightAccountMenu.css">
     <!-- you don't need to keep this, but it's cool for stats! -->
     <meta name="generator" content="Nanoc 4.11.18">
   </head>
@@ -522,7 +522,7 @@
         window.__SSO_COOKIE_NAME__ = 'flight_sso_dev';
         window.__FLIGHT_APP_URL__ = 'http://menu.alces-flight.lvh.me:3000';
     </script>
-    <script src="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.2.0/FlightAccountMenu.js"></script>
+    <script src="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.3.0/FlightAccountMenu.js"></script>
     <script>
         const FAM = FlightAccountMenu;
         const e = React.createElement;
@@ -550,29 +550,16 @@
         ReactDOM.render(menu, document.getElementById('flight-account-menu-sm'));
         ReactDOM.render(modals, document.getElementById('flight-account-modal-container'));
 
-        // Create a function that we want to run whenever the authentication changes.
-        function logCurrentUser(currentUser) {
+        // Add a callback function that we want to run whenever the authentication
+        // changes.
+        FAM.addOnAuthChangeCallback(function (currentUser) {
           console.log('currentUser is', currentUser);
-        }
+        })
         
-        // Wrap the function in a guard so non-auth-changes are ignored.
-        const guardedLogCurrentUser = FAM.auth.logic.whenAuthChanges(
-          logCurrentUser,
-          { includeInitial: false },
-        );
-        
-        // Subscribe the guarded function to every change to the redux store.
-        FAM.store.subscribe(function() {
-          guardedLogCurrentUser(FAM.store.dispatch, FAM.store.getState);
-        });
-
         // Connect sign in link to show login form.
-        function showLoginForm() {
-            FAM.store.dispatch(FAM.auth.actions.showLoginForm());
-        }
         document.getElementById('sign-in-link').addEventListener(
             'click',
-            showLoginForm,
+            FAM.showLoginForm,
         );
     </script>
   </body>

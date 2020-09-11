@@ -127,3 +127,32 @@ export {
   loadingStates,
   registration,
 };
+
+
+
+// Simplified API
+//
+// A collection of functions exported to simplify some common use cases.
+//
+function addOnAuthChangeCallback(callback) {
+  // Wrap the function in a guard so non-auth-changes are ignored.
+  const guardedCallback = auth.logic.whenAuthChanges(
+    callback,
+    { includeInitial: true },
+  );
+
+  // Subscribe the guarded function to every change to the redux store.
+  store.subscribe(function() {
+    guardedLogCurrentUser(store.dispatch, store.getState);
+  });
+  store.dispatch({ type: 'flight-account-menu/LOGIC_ADDED' });
+}
+
+function showLoginForm() {
+  store.dispatch(auth.actions.showLoginForm());
+}
+
+export {
+  addOnAuthChangeCallback,
+  showLoginForm,
+};

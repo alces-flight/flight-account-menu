@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import { AccountMenu, ModalContainer, store, auth } from 'flight-account-menu';
+import { AccountMenu, ModalContainer, addOnAuthChangeCallback, showLoginForm } from 'flight-account-menu';
 import 'flight-account-menu/dist/index.css';
 
 const Menu = () => {
@@ -30,18 +30,12 @@ ReactDOM.render(<Menu />, document.getElementById('flight-account-menu'));
 ReactDOM.render(<Menu />, document.getElementById('flight-account-menu-sm'));
 ReactDOM.render(<Modals />, document.getElementById('flight-account-modal-container'));
 
-// Create a function that we want to run whenever the authentication changes.
-function logCurrentUser(currentUser) {
+
+// Add a callback function that we want to run whenever the authentication
+// changes.
+addOnAuthChangeCallback(function(currentUser) {
   console.log('currentUser is', currentUser);
-}
-
-// Wrap the function in a guard so non-auth-changes are ignored.
-const guardedLogCurrentUser = auth.logic.whenAuthChanges(
-  logCurrentUser,
-  { includeInitial: false },
-);
-
-// Subscribe the guarded function to every change to the redux store.
-store.subscribe(() => {
-  guardedLogCurrentUser(store.dispatch, store.getState);
 });
+
+
+document.getElementById('sign-in-link').addEventListener('click', showLoginForm);
