@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/stylesheet.css">
     <link rel="stylesheet" href="/theme.css">
     <link rel="stylesheet" href="/fixes.css">
-    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.1.0/FlightAccountMenu.css">
+    <link rel="stylesheet" href="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.2.0/FlightAccountMenu.css">
     <!-- you don't need to keep this, but it's cool for stats! -->
     <meta name="generator" content="Nanoc 4.11.18">
   </head>
@@ -41,6 +41,8 @@
 
             <a href="/#contact" class="nav nav-link dropdown-item" type="button">Contact us</a>
           </div>
+
+            <div id="flight-account-menu-sm" />
         </div>
       </nav>
       <nav class="d-none d-lg-block navbar fixed-top navbar-dark" role="navigation">
@@ -82,6 +84,7 @@
         </div>
       </nav>
     </div>
+    <div id="flight-account-modal-container"></div>
     <div id="main">
       <section id="trailer-section" class="d-none d-md-block">
   <div id="trailer-container">
@@ -359,7 +362,7 @@
             Our email is <a href="mailto:info@alces-flight.com">info@alces-flight.com</a>.
           </p>
           <p>
-            Alces Flight customer? <a href="#">Sign in to your account</a>.
+            Alces Flight customer? <a id="sign-in-link" href="#">Sign in to your account</a>.
           </p>
         </div>
       </div>
@@ -511,33 +514,65 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script>
         // These need to be set prior to loading FlightAccountMenu.js
         window.__SSO_BASE_URL__ = 'http://accounts.alces-flight.lvh.me:4000';
         window.__SSO_COOKIE_NAME__ = 'flight_sso_dev';
         window.__FLIGHT_APP_URL__ = 'http://menu.alces-flight.lvh.me:3000';
     </script>
-    <script src="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.1.0/FlightAccountMenu.js"></script>
+    <script src="https://s3-eu-west-1.amazonaws.com/alces-flight/FlightAccountMenu/0.2.0/FlightAccountMenu.js"></script>
     <script>
+        const FAM = FlightAccountMenu;
         const e = React.createElement;
-        ReactDOM.render(
-            e(
-                FlightAccountMenu.AccountMenu,
-                {
-                    signedInLinks: [
-                        {
-                            href: "https://center.alces-flight.com",
-                            text: "Flight Center",
-                        }
-                    ],
-                    privacyPolicyUrl: "https://next.alces-flight.com/privacy",
-                    termsUrl: "https://next.alces-flight.com/terms",
-                }, 
-                null
-            ),
-            document.getElementById('flight-account-menu'),
+        const menu = e(
+            FAM.AccountMenu,
+            {
+                signedInLinks: [
+                    {
+                        href: "https://center.alces-flight.com",
+                        text: "Flight Center",
+                    }
+                ],
+            }, 
+            null
+        );
+        const modals = e(
+            FAM.ModalContainer,
+            {
+                privacyPolicyUrl: "https://next.alces-flight.com/privacy",
+                termsUrl: "https://next.alces-flight.com/terms",
+            },
+            null
+        );
+        ReactDOM.render(menu, document.getElementById('flight-account-menu'));
+        ReactDOM.render(menu, document.getElementById('flight-account-menu-sm'));
+        ReactDOM.render(modals, document.getElementById('flight-account-modal-container'));
+
+        // Create a function that we want to run whenever the authentication changes.
+        function logCurrentUser(currentUser) {
+          console.log('currentUser is', currentUser);
+        }
+        
+        // Wrap the function in a guard so non-auth-changes are ignored.
+        const guardedLogCurrentUser = FAM.auth.logic.whenAuthChanges(
+          logCurrentUser,
+          { includeInitial: false },
+        );
+        
+        // Subscribe the guarded function to every change to the redux store.
+        FAM.store.subscribe(function() {
+          guardedLogCurrentUser(FAM.store.dispatch, FAM.store.getState);
+        });
+
+        // Connect sign in link to show login form.
+        function showLoginForm() {
+            FAM.store.dispatch(FAM.auth.actions.showLoginForm());
+        }
+        document.getElementById('sign-in-link').addEventListener(
+            'click',
+            showLoginForm,
         );
     </script>
   </body>
