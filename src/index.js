@@ -18,6 +18,7 @@ import jsonApi from './modules/jsonApi';
 import loadingStates from './modules/loadingStates';
 import registration from './modules/registration';
 import Menu from './components/Menu';
+import Modals from './components/Modals';
 
 import AccountSettingsModal,
   { enhance as enhanceAccountSettingsModal } from './components/account/SettingsModal.js';
@@ -74,9 +75,24 @@ const componentOverrideConfigurations = [
 ];
 
 export const AccountMenu = ({
+  signedInLinks,
+}) => {
+  return (
+    <Provider store={store}>
+      <ConfigProvider
+        value={{
+          signedInLinks: signedInLinks || [],
+        }}
+      >
+        <Menu />
+      </ConfigProvider>
+    </Provider>
+  );
+}
+
+export const ModalContainer = ({
   components,
   privacyPolicyUrl,
-  signedInLinks,
   termsUrl,
 }) => {
   components = components || {};
@@ -91,12 +107,11 @@ export const AccountMenu = ({
       <ConfigProvider
         value={{
           privacyPolicyUrl: privacyPolicyUrl || "https://alces-flight.com/privacy",
-          signedInLinks: signedInLinks || [],
           termsUrl: termsUrl || "https://alces-flight.com/terms",
           components: enhancedComponents,
         }}
       >
-        <Menu />
+        <Modals />
       </ConfigProvider>
     </Provider>
   );

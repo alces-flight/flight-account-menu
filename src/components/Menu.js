@@ -12,29 +12,9 @@ function Menu({ currentUser }) {
   const { components } = React.useContext(ConfigContext);
 
   if (currentUser) {
-    return (
-      <React.Fragment>
-        <components.WelcomeMessageModal />
-        <components.AccountUpdatedModal />
-        <components.AccountSettingsModal />
-        <components.ConfirmPasswordModal />
-        <components.ConfirmationModal />
-
-        <SignedIn currentUser={currentUser} />
-      </React.Fragment>
-    );
+    return <SignedIn currentUser={currentUser} />;
   }
-  return (
-    <React.Fragment>
-      <components.CompleteRecoveryModal />
-      <components.ConfirmationModal />
-      <components.RegistrationModal />
-      <components.SignInModal />
-      <components.StartRecoveryModal />
-
-      <SignedOut />
-    </React.Fragment>
-  );
+  return <SignedOut />;
 }
 
 export default connect(
