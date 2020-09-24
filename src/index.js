@@ -143,7 +143,7 @@ function addOnAuthChangeCallback(callback) {
 
   // Subscribe the guarded function to every change to the redux store.
   store.subscribe(function() {
-    guardedLogCurrentUser(store.dispatch, store.getState);
+    guardedCallback(store.dispatch, store.getState);
   });
   store.dispatch({ type: 'flight-account-menu/LOGIC_ADDED' });
 }
