@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import jsGravatar from 'js-gravatar';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { connect } from 'react-redux';
 
 import { Context as ConfigContext } from '../../ConfigContext';
 import account from '../../modules/account';
@@ -11,19 +12,19 @@ import styles from '../../styles.module.css';
 
 function SignedIn({ currentUser, dispatch }) {
   const { signedInLinks } = useContext(ConfigContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen(prevState => !prevState);
 
   const avatarUrl = currentUser.avatarUrl ?
     currentUser.avatarUrl :
     jsGravatar({ email: currentUser.email, size: 48, defaultImage: 'identicon' });
 
   return (
-    <div className="dropdown align-self-center">
-      <a className="nav nav-link dropdown-toggle px-4 d-inline-flex"
+    <Dropdown isOpen={dropdownOpen} toggle={toggle} className="align-self-center">
+      <DropdownToggle
+        tag="a"
+        className="nav nav-link dropdown-toggle px-4 d-inline-flex"
         id="account-menu"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-        href="#"
       >
         <span
           className={
@@ -44,41 +45,41 @@ function SignedIn({ currentUser, dispatch }) {
         <span className="align-self-center user-avatar">
           <img src={avatarUrl} />
         </span>
-      </a>
-      <div className="dropdown-menu text-uppercase" aria-labelledby="account-menu">
+      </DropdownToggle>
+      <DropdownMenu>
         {
           signedInLinks.map(link => <Link key={link.href} {...link} />)
         }
-        <a
+        <DropdownItem
           href="#"
           className="nav nav-link dropdown-item"
           type="button"
           onClick={ () => { dispatch(account.actions.showSettingsModal()); } }
         >
           My account
-        </a>
-        <a
+        </DropdownItem>
+        <DropdownItem
           href="#"
           className="nav nav-link dropdown-item"
           type="button"
           onClick={ () => { dispatch(auth.actions.logout()); } }
         >
           Log out
-        </a>
-      </div>
-    </div>
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
   );
 }
 
 function Link({ href, text }) {
   return (
-    <a
+    <DropdownItem
       href={href}
-      className="nav nav-link dropdown-item"
+      className="nav nav-link"
       type="button"
     >
       {text}
-    </a>
+    </DropdownItem>
   );
 }
 
