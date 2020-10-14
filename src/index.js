@@ -152,6 +152,10 @@ function showLoginForm() {
   store.dispatch(auth.actions.showLoginForm());
 }
 
+function startSignUp() {
+  store.dispatch(registration.actions.startSignUp());
+}
+
 export {
   addOnAuthChangeCallback,
   showLoginForm,
