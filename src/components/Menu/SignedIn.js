@@ -51,18 +51,18 @@ function SignedIn({ currentUser, dispatch }) {
           signedInLinks.map(link => <Link key={link.href} {...link} />)
         }
         <DropdownItem
-          href="#"
           className="nav nav-link dropdown-item"
-          type="button"
           onClick={ () => { dispatch(account.actions.showSettingsModal()); } }
+          style={{ cursor: 'pointer' }}
+          tag="a"
         >
           My account
         </DropdownItem>
         <DropdownItem
-          href="#"
           className="nav nav-link dropdown-item"
-          type="button"
           onClick={ () => { dispatch(auth.actions.logout()); } }
+          style={{ cursor: 'pointer' }}
+          tag="a"
         >
           Log out
         </DropdownItem>
@@ -76,7 +76,6 @@ function Link({ href, text }) {
     <DropdownItem
       href={href}
       className="nav nav-link"
-      type="button"
     >
       {text}
     </DropdownItem>
