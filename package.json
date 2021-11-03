@@ -68,6 +68,6 @@
     "reselect": "^4.0.0",
     "seamless-immutable": "^7.1.4",
     "universal-cookie": "^4.0.3",
-    "validator": "^13.1.1"
+    "validator": "^13.7.0"
   }
 }
