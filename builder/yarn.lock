@@ -1832,8 +1832,8 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
 
 async@^2.6.2:
-  version "2.6.3"
-  resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
+  version "2.6.4"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.4.tgz#706b7ff6084664cd7eae713f6f965433b5504221"
   dependencies:
     lodash "^4.17.14"
 
@@ -4025,8 +4025,25 @@ flatten@^1.0.2:
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.3.tgz#c1283ac9f27b368abc1e36d1ff7b04501a30356b"
 
 "flight-account-menu@link:..":
-  version "0.0.0"
-  uid ""
+  version "0.3.2"
+  dependencies:
+    axios "^0.19.2"
+    classnames "^2.2.6"
+    js-gravatar "^1.1.3"
+    jwt-decode "^2.2.0"
+    pluralize "^8.0.0"
+    react-hook-form "^6.7.0"
+    react-redux "^7.2.1"
+    reactstrap "^8.5.1"
+    recompose "^0.30.0"
+    redux "^4.0.5"
+    redux-axios-middleware "^4.0.1"
+    redux-cookie "^0.5.9"
+    redux-thunk "^2.3.0"
+    reselect "^4.0.0"
+    seamless-immutable "^7.1.4"
+    universal-cookie "^4.0.3"
+    validator "^13.1.1"
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
@@ -5751,14 +5768,14 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
 "lodash@>=3.5 <5", lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.5:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
 
 loglevel@^1.6.6:
   version "1.6.8"
   resolved "https://registry.yarnpkg.com/loglevel/-/loglevel-1.6.8.tgz#8a25fb75d092230ecd4457270d80b54e28011171"
 
-loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   dependencies:
@@ -7551,7 +7568,6 @@ react-dev-utils@^10.2.1:
 
 "react-dom@link:../node_modules/react-dom":
   version "0.0.0"
-  uid ""
 
 react-error-overlay@^6.0.7:
   version "6.0.7"
@@ -7602,7 +7618,6 @@ react-transition-group@^2.3.1:
 
 "react@link:../node_modules/react":
   version "0.0.0"
-  uid ""
 
 reactstrap@^8.5.1:
   version "8.5.1"
@@ -7704,6 +7719,10 @@ recursive-readdir@2.2.2:
 redux-axios-middleware@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/redux-axios-middleware/-/redux-axios-middleware-4.0.1.tgz#e7eaaaae58d169b294aae4ef2428d03439f729cc"
+
+redux-cookie@^0.5.9:
+  version "0.5.9"
+  resolved "https://registry.yarnpkg.com/redux-cookie/-/redux-cookie-0.5.9.tgz#e3cc97cd16240252f0b43938358c26fb28015f64"
 
 redux-thunk@^2.3.0:
   version "2.3.0"
@@ -8049,13 +8068,6 @@ saxes@^3.1.9:
   resolved "https://registry.yarnpkg.com/saxes/-/saxes-3.1.11.tgz#d59d1fd332ec92ad98a2e0b2ee644702384b1c5b"
   dependencies:
     xmlchars "^2.1.1"
-
-scheduler@^0.19.1:
-  version "0.19.1"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 schema-utils@^1.0.0:
   version "1.0.0"
